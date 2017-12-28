@@ -5,8 +5,91 @@ header {
   box-shadow: 0 1px 0 0 #E9ECEF;
 }
 
-.grid {
+.container {
   margin: auto;
-  max-width: 978px;
+  max-width: 860px;
+  padding: 30px 0;
+}
+
+.container .row {
+  margin: 0 0 30px 0;
+  align-items: center;
+}
+
+.container .row.space-between {
+  justify-content: space-between;
+}
+
+.container .row.auto > .row-col {
+  width: 47.5%;
+}
+
+.container .row.auto.gutters > .row-col:first-of-type {
+  margin-right: 5%;
+}
+
+.close-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #E9ECEF;
+  border-radius: 100px;
+}
+
+.close-icon:hover {
+  cursor: pointer;
+}
+
+.labeled-input label {
+  font-weight: bold;
+}
+
+.labeled-input input {
+  transition: 0.2s;
+  border: 2px solid #E9ECEF;
+  border-radius: 4px;
+}
+
+.labeled-input input:focus {
+  outline: 0 none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-color: #007DFF;
+}
+
+.input-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.input-date .labeled-input.date {
+  position: relative;
+  width: 65%;
+  margin-right: 5%;
+}
+
+.input-date .labeled-input.date img {
+  position: absolute;
+  transition: 0.2s;
+  right: 15px;
+  bottom: 15px;
+  opacity: 0.4;
+}
+
+.input-date .labeled-input.time {
+  width: 20%;
+}
+
+.input-date .labeled-input.time:first-of-type {
+  margin-right: 5%;
+}
+
+.input-date span {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 25px 2.5% 0 2.5%;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,4 +1,22 @@
 $light-gray: #E9ECEF
+$light-blue: #007DFF
+$medium-blue: #0059FF
+$dark-blue: #0B00FF
+
+=no-outline
+  outline: 0 none
+  -webkit-box-shadow: none
+  box-shadow: none
+
+=centered
+  display: flex
+  align-items: center
+  justify-content: center
+
+=space-between
+  display: flex
+  align-items: center
+  justify-content: space-between
 
 header
   display: flex
@@ -6,6 +24,57 @@ header
   padding: 25px
   box-shadow: 0 1px 0 0 $light-gray
 
-.grid
+.container
   margin: auto
-  max-width: 978px
+  max-width: 860px
+  padding: 30px 0
+  .row
+    margin: 0 0 30px 0
+    align-items: center
+    &.space-between
+      justify-content: space-between
+    &.auto > .row-col
+      width: 47.5%
+    &.auto.gutters > .row-col:first-of-type
+      margin-right: 5%
+
+.close-icon
+  +centered
+  width: 30px
+  height: 30px
+  background: #E9ECEF
+  border-radius: 100px
+  &:hover
+    cursor: pointer
+
+.labeled-input
+  label
+    font-weight: bold
+  input
+    transition: 0.2s
+    border: 2px solid $light-gray
+    border-radius: 4px
+    &:focus
+      +no-outline
+      border-color: $light-blue
+
+.input-date
+  +space-between
+  .labeled-input.date
+    position: relative
+    width: 65%
+    margin-right: 5%
+    img
+      position: absolute
+      transition: 0.2s
+      right: 15px
+      bottom: 15px
+      opacity: 0.4
+  .labeled-input.time
+    width: 20%
+    &:first-of-type
+      margin-right: 5%
+  span
+    font-size: 20px
+    font-weight: bold
+    margin: 25px 2.5% 0 2.5%

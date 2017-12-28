@@ -1,11 +1,11 @@
 @media (min-width: 1400px) {
-  .grid {
+  .container {
     max-width: 1500px;
   }
 }
 
 @media (max-width: 870px) {
-  .grid {
+  .container {
     padding-left: 20px;
     padding-right: 20px;
   }
