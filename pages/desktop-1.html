@@ -9,6 +9,7 @@
     <link href="css/kube.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/media.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
@@ -53,16 +54,67 @@
 
             <div class="row auto gutters">
                 <div class="row-col">
-                    <div class="labeled-input">
+                    <div class="labeled-input participants">
                         <label>Участники</label>
-                        <input type="text" placeholder="О чём будете говорить?">
+                        <input type="text" placeholder="Например, Тор Одинович">
+                        <div class="input-dropdown">
+                            <ul class="people">
+                                <li class="person">
+                                    <img src="desktop-assets/close.svg">
+                                    <span class="name">Лекс Лютер</span>
+                                    <span class="dot">&#183;</span>
+                                    <span class="floor">7 этаж</span>
+                                </li>
+                                <li class="person">
+                                    <img src="desktop-assets/close.svg">
+                                    <span class="name">Томас Андерсон</span>
+                                    <span class="dot">&#183;</span>
+                                    <span class="floor">2 этаж</span>
+                                </li>
+                                <li class="person">
+                                    <img src="desktop-assets/close.svg">
+                                    <span class="name">Дарт Вейдер</span>
+                                    <span class="dot">&#183;</span>
+                                    <span class="floor">1 этаж</span>
+                                </li>
+                                <li class="person">
+                                    <img src="desktop-assets/close.svg">
+                                    <span class="name">Кларк Кент</span>
+                                    <span class="dot">&#183;</span>
+                                    <span class="floor">2 этаж</span>
+                                </li>
+                                <li class="person">
+                                    <img src="desktop-assets/close.svg">
+                                    <span class="name">Лекс Лютер</span>
+                                    <span class="dot">&#183;</span>
+                                    <span class="floor">7 этаж</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="row-col">
+                    <div class="labeled-room">
+                        <label>Ваша переговорка</label>
+                        <div class="room">
+                            <div class="info">
+                                <span class="time">16:00–16:30</span>
+                                <span class="location">Готем &#183; 4 этаж</span>
+                            </div>
+                            <img src="desktop-assets/close-white.svg">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </main>
 
+    <footer>
+        <button class="button">Отмена</button>
+        <button class="button blue">Создать встречу</button>
+    </footer>
 
 </body>
 

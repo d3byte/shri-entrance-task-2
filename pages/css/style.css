@@ -1,8 +1,21 @@
-header {
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+header, footer {
   display: flex;
   align-items: center;
   padding: 25px;
   box-shadow: 0 1px 0 0 #E9ECEF;
+}
+
+footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  justify-content: center;
+  box-shadow: 0 -1px 0 0 #E9ECEF;
 }
 
 .container {
@@ -13,7 +26,10 @@ header {
 
 .container .row {
   margin: 0 0 30px 0;
-  align-items: center;
+}
+
+.container .row h4 {
+  margin: 0;
 }
 
 .container .row.space-between {
@@ -59,6 +75,10 @@ header {
   border-color: #007DFF;
 }
 
+.labeled-input input:focus + .input-dropdown {
+  display: block;
+}
+
 .input-date {
   display: flex;
   align-items: center;
@@ -91,5 +111,119 @@ header {
   font-size: 20px;
   font-weight: bold;
   margin: 25px 2.5% 0 2.5%;
+}
+
+.input-dropdown {
+  width: 100%;
+  max-height: 150px;
+  margin-top: 0.5px;
+  box-shadow: 0px 6px 10px  #E9ECEF, 4px 4px 10px  #E9ECEF, -4px 6px 10px  #E9ECEF;
+  border-radius: 4px;
+  overflow-y: scroll;
+  display: none;
+}
+
+.input-dropdown ul.people {
+  margin: 0;
+  list-style-type: none;
+}
+
+.input-dropdown ul.people li.person {
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.input-dropdown ul.people li.person img {
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  border: 1px solid #E9ECEF;
+  margin-right: 10px;
+}
+
+.input-dropdown ul.people li.person span.floor, .input-dropdown ul.people li.person span.dot {
+  font-weight: normal;
+  margin-left: 5px;
+  color: #ccc;
+  vertical-align: middle;
+}
+
+.input-dropdown ul.people li.person span.dot {
+  color: black;
+}
+
+.input-dropdown ul.people li.person:hover {
+  background: #F6F7F9;
+}
+
+.input-dropdown ul.people li.person:hover span {
+  font-weight: bold;
+}
+
+.labeled-room label {
+  font-weight: bold;
+}
+
+.labeled-room > .room {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  height: 36px;
+  background: #007DFF;
+  border-radius: 4px;
+}
+
+.labeled-room > .room .info > span {
+  font-size: 14px;
+  color: white;
+  font-weight: normal;
+  font-family: 'Roboto', sans-serif;
+}
+
+.labeled-room > .room .info > .time {
+  font-weight: bold;
+  margin-right: 15px;
+}
+
+.labeled-room > .room img {
+  margin-right: 4px;
+}
+
+button.button {
+  transition: 0.2s;
+  height: 25px !important;
+  padding: 0px 20px !important;
+  border-radius: 4px !important;
+  background: #E9ECEF;
+  color: black;
+  margin: 0 20px 0 0;
+  font-size: 14px;
+}
+
+button.button:last-of-type {
+  margin-right: 0;
+}
+
+button.button.blue {
+  background: #007DFF;
+  color: white;
+}
+
+button.button:hover {
+  background: #0059FF;
+}
+
+button.button:active {
+  background: #0B00FF;
+}
+
+button.button:disabled {
+  background: #E9ECEF;
+  color: rgba(0, 0, 0, 0.2);
 }
 /*# sourceMappingURL=style.css.map */
