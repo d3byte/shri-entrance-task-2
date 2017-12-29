@@ -9,6 +9,10 @@ header, footer {
   box-shadow: 0 1px 0 0 #E9ECEF;
 }
 
+header.main-page {
+  justify-content: space-between;
+}
+
 footer {
   position: fixed;
   width: 100%;
@@ -280,6 +284,14 @@ button.button:active {
 button.button:disabled {
   background: #E9ECEF;
   color: rgba(0, 0, 0, 0.2);
+}
+
+a.button-wrapper {
+  margin: 0 20px 0 0;
+}
+
+a.button-wrapper:first-of-type {
+  margin: 0;
 }
 
 .modal.open {
