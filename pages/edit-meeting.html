@@ -128,17 +128,33 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </main>
 
+    <div id="delete-meeting" class="modal-box hide">
+        <div class="modal">
+            <div class="modal-body">
+                <div class="col centered">
+                    <img src="desktop-assets/emoji1.svg">
+                    <h4>Встреча будет удалена безвозвратно</h4>
+                </div>
+                <div class="row centered">
+                    <button class="button" data-action="modal-close">Отмена</button>
+                    <button class="button" data-action="modal-close">Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <button class="button">Отмена</button>
-        <button class="button">Удалить встречу</button>
+        <button class="button" data-component="modal" data-target="#delete-meeting">Удалить встречу</button>
         <button class="button">Сохранить</button>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/kube.min.js"></script>
 </body>
 
 </html>

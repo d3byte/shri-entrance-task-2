@@ -44,6 +44,17 @@ footer {
   margin-right: 5%;
 }
 
+.col.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.col.centered h4 {
+  text-align: center;
+}
+
 .close-icon {
   display: flex;
   align-items: center;
@@ -269,5 +280,21 @@ button.button:active {
 button.button:disabled {
   background: #E9ECEF;
   color: rgba(0, 0, 0, 0.2);
+}
+
+.modal.open {
+  width: 400px !important;
+}
+
+.modal-body > .row.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.modal-body > .row.centered img {
+  width: 42px;
+  height: 42px;
 }
 /*# sourceMappingURL=style.css.map */

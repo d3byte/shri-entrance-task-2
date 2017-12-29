@@ -4,29 +4,47 @@ $light-blue: #007DFF
 $medium-blue: #0059FF
 $dark-blue: #0B00FF
 
+
+
 =no-outline
   outline: 0 none
   -webkit-box-shadow: none
   box-shadow: none
+
+
 
 =centered
   display: flex
   align-items: center
   justify-content: center
 
+
+
+=centered-col
+  +centered
+  flex-direction: column
+
+
+
 =space-between
   display: flex
   align-items: center
   justify-content: space-between
 
+
+
 *
   font-family: 'Roboto', sans-serif
+
+
 
 header, footer
   display: flex
   align-items: center
   padding: 25px
   box-shadow: 0 1px 0 0 $light-gray
+
+
 
 footer
   position: fixed
@@ -35,6 +53,8 @@ footer
   left: 0
   justify-content: center
   box-shadow: 0 -1px 0 0 $light-gray
+
+
 
 .container
   margin: auto
@@ -51,6 +71,15 @@ footer
     &.auto.gutters > .row-col:first-of-type
       margin-right: 5%
 
+
+
+.col.centered
+  +centered-col
+  h4
+    text-align: center
+
+
+
 .close-icon
   +centered
   width: 30px
@@ -59,6 +88,8 @@ footer
   border-radius: 100px
   &:hover
     cursor: pointer
+
+
 
 .labeled-input
   label
@@ -74,6 +105,8 @@ footer
         display: block
         & + .invited-people
           display: none
+
+
 
 .input-date
   +space-between
@@ -95,6 +128,8 @@ footer
     font-size: 20px
     font-weight: bold
     margin: 25px 2.5% 0 2.5%
+
+
 
 .input-dropdown
   width: 100%
@@ -132,6 +167,8 @@ footer
         span
           font-weight: bold
 
+
+
 .invited-people
   display: flex
   flex-wrap: wrap
@@ -159,6 +196,8 @@ footer
       &:hover
         cursor: pointer
 
+
+
 .labeled-room
   label
     font-weight: bold
@@ -179,6 +218,8 @@ footer
         margin-right: 15px
     img
       margin-right: 4px
+
+
 
 button.button
   transition: 0.2s
@@ -201,3 +242,12 @@ button.button
   &:disabled
     background: $light-gray
     color: rgba(0,0,0,0.20)
+
+.modal.open
+  width: 400px !important
+.modal-body > .row.centered
+  +centered
+  padding: 10px
+  img
+    width: 42px
+    height: 42px
