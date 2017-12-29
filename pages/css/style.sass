@@ -72,6 +72,8 @@ footer
       border-color: $light-blue
       & + .input-dropdown
         display: block
+        & + .invited-people
+          display: none
 
 .input-date
   +space-between
@@ -129,6 +131,33 @@ footer
         background: $li-gray
         span
           font-weight: bold
+
+.invited-people
+  display: flex
+  flex-wrap: wrap
+  margin-top: 12px
+  .invited-person
+    +space-between
+    width: 45%
+    background: $light-gray
+    border-radius: 16px
+    padding: 0
+    margin: 0 8px 8px 0
+    .person-wrapper
+      display: flex
+      align-items: center
+      font-size: 14px
+      img.avatar
+        background: gray
+        width: 24px
+        height: 24px
+        border-radius: 100px
+        margin-right: 10px
+    img.icon
+      width: 9px
+      margin-right: 12px
+      &:hover
+        cursor: pointer
 
 .labeled-room
   label

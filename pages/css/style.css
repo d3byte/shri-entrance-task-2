@@ -79,6 +79,10 @@ footer {
   display: block;
 }
 
+.labeled-input input:focus + .input-dropdown + .invited-people {
+  display: none;
+}
+
 .input-date {
   display: flex;
   align-items: center;
@@ -162,6 +166,46 @@ footer {
 
 .input-dropdown ul.people li.person:hover span {
   font-weight: bold;
+}
+
+.invited-people {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.invited-people .invited-person {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 45%;
+  background: #E9ECEF;
+  border-radius: 16px;
+  padding: 0;
+  margin: 0 8px 8px 0;
+}
+
+.invited-people .invited-person .person-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.invited-people .invited-person .person-wrapper img.avatar {
+  background: gray;
+  width: 24px;
+  height: 24px;
+  border-radius: 100px;
+  margin-right: 10px;
+}
+
+.invited-people .invited-person img.icon {
+  width: 9px;
+  margin-right: 12px;
+}
+
+.invited-people .invited-person img.icon:hover {
+  cursor: pointer;
 }
 
 .labeled-room label {
