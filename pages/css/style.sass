@@ -1,8 +1,10 @@
 $light-gray: #E9ECEF
 $li-gray: #F6F7F9
+$dark-gray: #858E98
 $light-blue: #007DFF
 $medium-blue: #0059FF
 $dark-blue: #0B00FF
+$text-blue: #0070E0
 
 
 
@@ -13,9 +15,14 @@ $dark-blue: #0B00FF
 
 
 
-=centered
+=flex-vertical-center
   display: flex
   align-items: center
+
+
+
+=centered
+  +flex-vertical-center
   justify-content: center
 
 
@@ -27,8 +34,7 @@ $dark-blue: #0B00FF
 
 
 =space-between
-  display: flex
-  align-items: center
+  +flex-vertical-center
   justify-content: space-between
 
 
@@ -39,8 +45,7 @@ $dark-blue: #0B00FF
 
 
 header, footer
-  display: flex
-  align-items: center
+  +flex-vertical-center
   padding: 25px
   box-shadow: 0 1px 0 0 $light-gray
 
@@ -85,7 +90,7 @@ footer
 
 
 
-.close-icon
+.icon-container
   +centered
   width: 30px
   height: 30px
@@ -267,3 +272,47 @@ a.button-wrapper
   img
     width: 42px
     height: 42px
+
+
+
+main.main-page
+  .top-bar
+    +flex-vertical-center
+    padding: 10px 25px
+    box-shadow: 0 1px 0 0 $light-gray
+    .date
+      +flex-vertical-center
+      width: 280px
+      & > .icon-container:first-of-type
+          margin-right: 20px
+      & > h5
+        margin: 0 20px 0 0
+        &:hover
+          cursor: pointer
+  .side-bar
+    width: 305px
+    padding: 10px 25px
+    box-shadow: 1px 0 0 0 $light-gray
+    .floor-container
+      margin-bottom: 10px
+      .floor-num
+        font-size: 12px
+        text-transform: uppercase
+        color: $dark-gray
+      ul.floors
+        margin: 0
+        list-style-type: none
+        li.floor
+          padding: 8px 0
+          line-height: 20px
+          .title
+            font-size: 16px
+            font-weight: bold
+          .capacity
+            font-size: 14px
+            font-weight: normal
+          &.disabled > span
+            color: $dark-gray
+          &.active > .title
+            color: $text-blue
+
