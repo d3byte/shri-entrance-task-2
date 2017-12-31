@@ -324,8 +324,19 @@ main.main-page
       .time-area
         display: flex
         flex-direction: column
-        flex: 0 0 66px
+        flex: 0 0 60px
         white-space: nowrap
+        &.current
+          position: relative
+          &:after
+            content: ''
+            position: absolute
+            width: 1px
+            right: 0
+            top: 0
+            height: 100%
+            background: blue
+            border-right: 1px solid $light-blue
         .floors
           margin-top: 1px
           background: $li-gray
@@ -359,17 +370,3 @@ main.main-page
             margin-bottom: 22px
             &:last-of-type
               margin-bottom: 0
-          
-    .timetable
-      overflow: visible
-      .empty-row
-        +flex-vertical-center
-        white-space: nowrap
-        &:first-of-type
-          margin-top: 1px
-        & > .empty-cell
-          +flex-vertical-center
-          flex: 0 0 66px
-          height: 61px
-          &:first-of-type
-            margin-left: -39px

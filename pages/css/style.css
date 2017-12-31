@@ -397,8 +397,23 @@ main.main-page .right-bar .timeline {
 main.main-page .right-bar .timeline .time-area {
   display: flex;
   flex-direction: column;
-  flex: 0 0 66px;
+  flex: 0 0 60px;
   white-space: nowrap;
+}
+
+main.main-page .right-bar .timeline .time-area.current {
+  position: relative;
+}
+
+main.main-page .right-bar .timeline .time-area.current:after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background: blue;
+  border-right: 1px solid #007DFF;
 }
 
 main.main-page .right-bar .timeline .time-area .floors {
@@ -451,30 +466,5 @@ main.main-page .right-bar .timeline .time-area .rows .room {
 
 main.main-page .right-bar .timeline .time-area .rows .room:last-of-type {
   margin-bottom: 0;
-}
-
-main.main-page .right-bar .timetable {
-  overflow: visible;
-}
-
-main.main-page .right-bar .timetable .empty-row {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-main.main-page .right-bar .timetable .empty-row:first-of-type {
-  margin-top: 1px;
-}
-
-main.main-page .right-bar .timetable .empty-row > .empty-cell {
-  display: flex;
-  align-items: center;
-  flex: 0 0 66px;
-  height: 61px;
-}
-
-main.main-page .right-bar .timetable .empty-row > .empty-cell:first-of-type {
-  margin-left: -39px;
 }
 /*# sourceMappingURL=style.css.map */
