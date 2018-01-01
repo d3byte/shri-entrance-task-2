@@ -402,6 +402,15 @@ main.main-page .right-bar .timeline .time-area.current {
   position: relative;
 }
 
+main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
+  display: block;
+  padding: 0 10px;
+  border-radius: 100px;
+  color: white;
+  background: #007DFF;
+  z-index: 5000;
+}
+
 main.main-page .right-bar .timeline .time-area .floors {
   display: flex;
   flex-direction: column;
@@ -422,9 +431,9 @@ main.main-page .right-bar .timeline .time-area .timing {
 }
 
 main.main-page .right-bar .timeline .time-area .timing > span {
-  margin-right: -3px;
+  margin-right: -4px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 10px;
   color: #858E98;
   z-index: 1000;
 }

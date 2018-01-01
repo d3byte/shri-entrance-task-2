@@ -42,24 +42,44 @@ function addStyle(currentTime) {
                     position: absolute;
                     width: 1px;
                     right: -${currentTime.minutes}px;
-                    top: 0;
-                    height: 100%;
+                    top: 15px;
+                    height: calc(100% - 15px);
                     background: blue;
-                    border-right: 1px solid $light-blue;
+                    border-right: 1px solid #007DFF;
                 }
+
+                main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
+                    margin-right: -${23 + parseInt(currentTime.minutes)}px;
+                }
+
                 @media only screen and (-webkit-min-device-pixel-ratio: 0) { 
                     .current::before {
                         content: '';
                         position: absolute;
                         width: 1px;
                         left: ${currentTime.minutes}px;
-                        top: 0;
-                        height: 100%;
+                        top: 15px;
+                        height: calc(100% - 15px);
                         background: blue;
-                        border-right: 1px solid $light-blue;
+                        border-right: 1px solid #007DFF;
                     }
+
                     .current::after {
                         content: none !important;
+                    }
+                    main.main-page .right-bar .timeline .time-area .timing > span:first-of-type {
+                        margin-right: 0;
+                        margin-left: -4px;
+                    }
+                    main.main-page .right-bar .timeline .time-area:first-of-type .timing > span {
+                        margin-left: 0;
+                    }
+                     main.main-page .right-bar .timeline .time-area.current .timing > span {
+                        ${currentTime.minutes > 22 ? 
+                        `margin-left: ${Math.abs(23 - parseInt(currentTime.minutes))}px;`
+                        :
+                        `margin-left: -${Math.abs(23 - parseInt(currentTime.minutes))}px;`
+                        }
                     }
                 }`,
         head = document.head || document.getElementsByTagName('head')[0],
@@ -81,7 +101,9 @@ function renderTimelines(data, currentTime) {
         var renderString = `
         <div class="time-area ${item == currentTime.time ? 'current' : ''}">
             <div class="timing">
-                <span>${item}</span>
+                
+                
+                    <span>${item}</span>
             </div>
             <div class="floors">
                 <div class="floor">

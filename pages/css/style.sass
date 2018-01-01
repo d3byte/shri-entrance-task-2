@@ -325,6 +325,13 @@ main.main-page
         white-space: nowrap
         &.current
           position: relative
+          .timing > span:last-of-type
+            display: block
+            padding: 0 10px
+            border-radius: 100px
+            color: white
+            background: $light-blue
+            z-index: 5000
         .floors
           display: flex
           flex-direction: column
@@ -340,15 +347,14 @@ main.main-page
           border-top: 1px solid $light-gray
           background: white
           & > span
-            margin-right: -3px
+            margin-right: -4px
             font-weight: bold
-            font-size: 12px
+            font-size: 10px
             color: $dark-gray
             z-index: 1000
+          
           & + .floors .floor:first-of-type .room:first-of-type
             margin-top: 65px
-        // &:first-of-type
-        //   margin-left: -10px
         .floor
           margin-bottom: 72px
           background: $li-gray
