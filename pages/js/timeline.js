@@ -37,78 +37,76 @@ function computeDataToRender(currentTime) {
 }
 
 function addStyle(currentTime) {
-    var styleTag = document.getElementById("pseudo")
-    var sheet = styleTag.sheet ? styleTag.sheet : styleTag.styleSheet
-    if (sheet.insertRule) {
-        sheet.insertRule(`.time-area.current:after { right: ${currentTime.minutes}px }`, 0)
-        return
+    var css = `.current::after { 
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    right: -${currentTime.minutes}px;
+                    top: 0;
+                    height: 100%;
+                    background: blue;
+                    border-right: 1px solid $light-blue;
+                }
+                @media only screen and (-webkit-min-device-pixel-ratio: 0) { 
+                    .current::before {
+                        content: '';
+                        position: absolute;
+                        width: 1px;
+                        left: ${currentTime.minutes}px;
+                        top: 0;
+                        height: 100%;
+                        background: blue;
+                        border-right: 1px solid $light-blue;
+                    }
+                    .current::after {
+                        content: none !important;
+                    }
+                }`,
+        head = document.head || document.getElementsByTagName('head')[0],
+        style = document.createElement('style');
+    style.type = 'text/css';
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css;
     } else {
-        sheet.addRule(`.time-area.current:after { right: ${currentTime.minutes}px }`, 0)
-        return
-    } 
+        style.appendChild(document.createTextNode(css));
+    }
+
+    head.appendChild(style)
 }
 
 function renderTimelines(data, currentTime) {
     var render = ''
     for(var item of data) {
-        var renderString
-        if(item == currentTime.time) {
-            renderString = `
-            <div class="time-area current">
-                <div class="timing">
-                    <span>${item}</span>
-                </div>
-                <div class="floors">
-                    <div class="floor">
-                        <div class="rows">
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                        </div>
+        console.log(item)
+        var renderString = `
+        <div class="time-area ${item == currentTime.time ? 'current' : ''}">
+            <div class="timing">
+                <span>${item}</span>
+            </div>
+            <div class="floors">
+                <div class="floor">
+                    <div class="rows">
+                        <div class="room"></div>
+                        <div class="room"></div>
+                        <div class="room"></div>
+                        <div class="room"></div>
                     </div>
-                    <div class="floor">
-                        <div class="rows">
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                        </div>
+                </div>
+                <div class="floor">
+                    <div class="rows">
+                        <div class="room"></div>
+                        <div class="room"></div>
+                        <div class="room"></div>
+                        <div class="room"></div>
+                        <div class="room"></div>
                     </div>
                 </div>
             </div>
-            `
-        } else {
-            renderString = `
-            <div class="time-area">
-                <div class="timing">
-                    <span>${item}</span>
-                </div>
-                <div class="floors">
-                    <div class="floor">
-                        <div class="rows">
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                        </div>
-                    </div>
-                    <div class="floor">
-                        <div class="rows">
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                            <div class="room"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
-        }
+        </div>
+        `
         render += renderString
     }
+    addStyle(currentTime)
     document.querySelector('.timeline').innerHTML = render
 }
 

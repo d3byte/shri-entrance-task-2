@@ -320,24 +320,14 @@ main.main-page
     .timeline
       +flex-vertical-center
       width: 100%
-      white-space: nowrap
       .time-area
-        display: flex
-        flex-direction: column
         flex: 0 0 60px
         white-space: nowrap
         &.current
           position: relative
-          &:after
-            content: ''
-            position: absolute
-            width: 1px
-            right: 0
-            top: 0
-            height: 100%
-            background: blue
-            border-right: 1px solid $light-blue
         .floors
+          display: flex
+          flex-direction: column
           margin-top: 1px
           background: $li-gray
           border-right: 1px solid $column-border-color
@@ -357,8 +347,8 @@ main.main-page
             z-index: 1000
           & + .floors .floor:first-of-type .room:first-of-type
             margin-top: 65px
-        &:first-of-type
-          margin-left: -10px
+        // &:first-of-type
+        //   margin-left: -10px
         .floor
           margin-bottom: 72px
           background: $li-gray

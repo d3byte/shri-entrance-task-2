@@ -391,12 +391,9 @@ main.main-page .right-bar .timeline {
   display: flex;
   align-items: center;
   width: 100%;
-  white-space: nowrap;
 }
 
 main.main-page .right-bar .timeline .time-area {
-  display: flex;
-  flex-direction: column;
   flex: 0 0 60px;
   white-space: nowrap;
 }
@@ -405,18 +402,9 @@ main.main-page .right-bar .timeline .time-area.current {
   position: relative;
 }
 
-main.main-page .right-bar .timeline .time-area.current:after {
-  content: '';
-  position: absolute;
-  width: 1px;
-  right: 0;
-  top: 0;
-  height: 100%;
-  background: blue;
-  border-right: 1px solid #007DFF;
-}
-
 main.main-page .right-bar .timeline .time-area .floors {
+  display: flex;
+  flex-direction: column;
   margin-top: 1px;
   background: #F6F7F9;
   border-right: 1px solid rgba(19, 100, 205, 0.1);
@@ -443,10 +431,6 @@ main.main-page .right-bar .timeline .time-area .timing > span {
 
 main.main-page .right-bar .timeline .time-area .timing + .floors .floor:first-of-type .room:first-of-type {
   margin-top: 65px;
-}
-
-main.main-page .right-bar .timeline .time-area:first-of-type {
-  margin-left: -10px;
 }
 
 main.main-page .right-bar .timeline .time-area .floor {

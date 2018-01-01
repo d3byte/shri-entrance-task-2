@@ -7,3 +7,14 @@
         padding-left: 20px 
         padding-right: 20px
     
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+    /* Safari and Chrome */
+    .myClass {
+     color:red;
+    }
+
+    /* Safari only override */
+    ::i-block-chrome,.myClass {
+     color:blue;
+    }
+}
