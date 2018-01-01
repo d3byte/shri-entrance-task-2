@@ -26,7 +26,10 @@ function computeDataToRender(currentTime) {
         }
         data.push(i)
     }
-    for (var i = currentTime.hours + 1; i < data[0]; i++) {
+    for (var i = currentTime.hours + 1; i < 24; i++) {
+        data.push(i)
+    }
+    for (var i = 0; i < data[0]; i++) {
         data.push(i)
     }
     console.log(data)
