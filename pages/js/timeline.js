@@ -1,3 +1,76 @@
+var events = [
+    {
+        "id": "1",
+        "title": "ШРИ 2018 - начало",
+        "dateStart": "2017-12-28T13:57:23.309Z",
+        "dateEnd": "2017-12-28T14:57:23.309Z",
+        "users": [
+            {
+                "id": "1",
+                "login": "veged"
+            },
+            {
+                "id": "2",
+                "login": "alt-j"
+            }
+        ],
+        "room": {
+            "id": "1",
+            "title": "404",
+            "capacity": 5,
+            "floor": 7
+        }
+    },
+    {
+        "id": "2",
+        "title": "👾 Хакатон 👾",
+        "dateStart": "2017-12-28T14:57:23.309Z",
+        "dateEnd": "2017-12-28T15:57:23.309Z",
+        "users": [
+            {
+                "id": "2",
+                "login": "alt-j"
+            },
+            {
+                "id": "3",
+                "login": "yeti-or"
+            }
+        ],
+        "room": {
+            "id": "2",
+            "title": "Деньги",
+            "capacity": 4,
+            "floor": 6
+        }
+    },
+    {
+        "id": "3",
+        "title": "🍨 Пробуем kefir.js",
+        "dateStart": "2017-12-28T16:57:23.309Z",
+        "dateEnd": "2017-12-28T18:57:23.309Z",
+        "users": [
+            {
+                "id": "1",
+                "login": "veged"
+            },
+            {
+                "id": "3",
+                "login": "yeti-or"
+            }
+        ],
+        "room": {
+            "id": "3",
+            "title": "Карты",
+            "capacity": 4,
+            "floor": 7
+        }
+    }
+]
+
+function fetchEvents(ms) {
+    return new Promise((resolve, reject) => setTimeout(() => resolve(events), ms))
+}
+
 function determineTime() {
     var date = new Date()
     var hours = date.getHours()
@@ -32,7 +105,6 @@ function computeDataToRender(currentTime) {
     for (var i = 0; i < data[0]; i++) {
         data.push(i)
     }
-    console.log(data)
     return data
 }
 
@@ -97,7 +169,6 @@ function addStyle(currentTime) {
 function renderTimelines(data, currentTime) {
     var render = ''
     for(var item of data) {
-        console.log(item)
         var renderString = `
         <div class="time-area ${item == currentTime.time ? 'current' : ''}">
             <div class="timing">
@@ -133,9 +204,12 @@ function renderTimelines(data, currentTime) {
 }
 
 function setTimeline() {
-    var currentTime = determineTime()
-    var renderData = computeDataToRender(currentTime)
-    renderTimelines(renderData, currentTime)
+    fetchEvents(0).then(res => {
+        console.log(res)
+        var currentTime = determineTime()
+        var renderData = computeDataToRender(currentTime)
+        renderTimelines(renderData, currentTime)
+    })
 }
 
 setTimeline()
