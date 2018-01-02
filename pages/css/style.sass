@@ -325,13 +325,18 @@ main.main-page
         white-space: nowrap
         &.current
           position: relative
-          .timing > span:last-of-type
-            display: block
-            padding: 0 10px
-            border-radius: 100px
-            color: white
-            background: $light-blue
-            z-index: 5000
+          .timing
+            position: relative
+            & > .hours
+              position: absolute
+              right: 0
+            & > span:last-of-type
+              display: block
+              padding: 0 10px
+              border-radius: 100px
+              color: white
+              background: $light-blue
+              
         .floors
           display: flex
           flex-direction: column

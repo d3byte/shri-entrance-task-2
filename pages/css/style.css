@@ -402,13 +402,21 @@ main.main-page .right-bar .timeline .time-area.current {
   position: relative;
 }
 
+main.main-page .right-bar .timeline .time-area.current .timing {
+  position: relative;
+}
+
+main.main-page .right-bar .timeline .time-area.current .timing > .hours {
+  position: absolute;
+  right: 0;
+}
+
 main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
   display: block;
   padding: 0 10px;
   border-radius: 100px;
   color: white;
   background: #007DFF;
-  z-index: 5000;
 }
 
 main.main-page .right-bar .timeline .time-area .floors {
