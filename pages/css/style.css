@@ -398,6 +398,10 @@ main.main-page .right-bar .timeline .time-area {
   white-space: nowrap;
 }
 
+main.main-page .right-bar .timeline .time-area:first-of-type {
+  margin-left: -25px;
+}
+
 main.main-page .right-bar .timeline .time-area.current {
   position: relative;
 }
@@ -417,6 +421,7 @@ main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-ty
   border-radius: 100px;
   color: white;
   background: #007DFF;
+  z-index: 5000;
 }
 
 main.main-page .right-bar .timeline .time-area .floors {
@@ -430,7 +435,7 @@ main.main-page .right-bar .timeline .time-area .floors {
 main.main-page .right-bar .timeline .time-area .timing {
   display: flex;
   align-items: center;
-  justify-content: right;
+  justify-content: left;
   padding: 10px 0;
   height: 50px;
   box-shadow: 0 1px 0 0 #E9ECEF;
@@ -467,5 +472,25 @@ main.main-page .right-bar .timeline .time-area .rows .room {
 
 main.main-page .right-bar .timeline .time-area .rows .room:last-of-type {
   margin-bottom: 0;
+}
+
+main.main-page .right-bar .timeline .time-area .rows .room > button {
+  transition: 0.2s;
+  width: 100%;
+  min-height: 35px;
+  padding: 0;
+  background: white;
+  border: none;
+  border-radius: 0;
+}
+
+main.main-page .right-bar .timeline .time-area .rows .room:hover > button {
+  cursor: pointer;
+  background: #1D54FE;
+  border-radius: 2px;
+}
+
+main.main-page .right-bar .timeline .time-area .rows .room:hover > button:active {
+  background: #1D00FE;
 }
 /*# sourceMappingURL=style.css.map */

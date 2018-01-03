@@ -6,7 +6,9 @@ $medium-blue: #0059FF
 $dark-blue: #0B00FF
 $text-blue: #0070E0
 $column-border-color: rgba(19,100,205,0.10)
-$room-free-space: #D5DFE9
+$room-taken: #D5DFE9
+$room-hover: #1D54FE
+$room-pressed: #1D00FE
 
 =no-outline
   outline: 0 none
@@ -323,6 +325,8 @@ main.main-page
       .time-area
         flex: 0 0 60px
         white-space: nowrap
+        &:first-of-type
+          margin-left: -25px
         &.current
           position: relative
           .timing
@@ -336,7 +340,7 @@ main.main-page
               border-radius: 100px
               color: white
               background: $light-blue
-              
+              z-index: 5000
         .floors
           display: flex
           flex-direction: column
@@ -345,7 +349,7 @@ main.main-page
           border-right: 1px solid $column-border-color
         .timing
           +flex-vertical-center
-          justify-content: right
+          justify-content: left
           padding: 10px 0
           height: 50px
           box-shadow: 0 1px 0 0 $light-gray
@@ -357,7 +361,6 @@ main.main-page
             font-size: 10px
             color: $dark-gray
             z-index: 1000
-          
           & + .floors .floor:first-of-type .room:first-of-type
             margin-top: 65px
         .floor
@@ -367,7 +370,21 @@ main.main-page
           width: 100%
           .room
             height: 35px
-            background: $room-free-space
+            background: $room-taken
             margin-bottom: 22px
             &:last-of-type
               margin-bottom: 0
+            & > button
+              transition: 0.2s
+              width: 100%
+              min-height: 35px
+              padding: 0
+              background: white
+              border: none
+              border-radius: 0
+            &:hover > button
+              cursor: pointer
+              background: $room-hover
+              border-radius: 2px
+              &:active
+                background: $room-pressed
