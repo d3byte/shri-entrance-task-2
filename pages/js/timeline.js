@@ -197,38 +197,45 @@ function addStyle(currentTime) {
     var css = `main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
                     margin-right: -${23 + parseInt(currentTime.minutes)}px;
                 }
-
                 .current::before {
-                        content: '';
-                        position: absolute;
-                        width: 1px;
-                        left: ${currentTime.minutes}px;
-                        top: 15px;
-                        height: calc(100% - 15px);
-                        background: blue;
-                        border-right: 1px solid #007DFF;
-                        z-index: 5000
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    left: ${currentTime.minutes}px;
+                    top: 15px;
+                    height: calc(100% - 15px);
+                    background: blue;
+                    border-right: 1px solid #007DFF;
+                    z-index: 5000
+                }
+                main.main-page .right-bar .timeline .time-area.current .timing > .hours {
+                    right: calc(100% - 5px);
+                }
+                main.main-page .right-bar .timeline .time-area .timing > span:first-of-type {
+                    margin-right: 0;
+                    margin-left: -4px;
+                }
+                main.main-page .right-bar .timeline .time-area:first-of-type .timing > span {
+                    margin-left: 0;
+                }
+                main.main-page .right-bar .timeline .time-area.current .timing > span {
+                ${currentTime.minutes > 22 ?
+                    `margin-left: ${Math.abs(23 - parseInt(currentTime.minutes))}px;`
+                    :
+                    `margin-left: -${Math.abs(23 - parseInt(currentTime.minutes))}px;`
+                }
+                }
+                @media (min-width: 1920px) {
+                    .current::before {
+                        left: ${2 * parseInt(currentTime.minutes)}px;
                     }
 
-                    main.main-page .right-bar .timeline .time-area.current .timing > .hours {
-                        right: calc(100% - 5px);
+                    main.main-page .right-bar .timeline .time-area.current .timing > span {
+                    ${currentTime.minutes > 22 ?
+                        `margin-left: ${2 * Math.abs(11 - parseInt(currentTime.minutes))}px;`
+                        :
+                        `margin-left: -${2 * Math.abs(11 - parseInt(currentTime.minutes))}px;`
                     }
-
-                    main.main-page .right-bar .timeline .time-area .timing > span:first-of-type {
-                        margin-right: 0;
-                        margin-left: -4px;
-                    }
-
-                    main.main-page .right-bar .timeline .time-area:first-of-type .timing > span {
-                        margin-left: 0;
-                    }
-
-                     main.main-page .right-bar .timeline .time-area.current .timing > span {
-                        ${currentTime.minutes > 22 ?
-                            `margin-left: ${Math.abs(23 - parseInt(currentTime.minutes))}px;`
-                            :
-                            `margin-left: -${Math.abs(23 - parseInt(currentTime.minutes))}px;`
-                        }
                     }
                 }`,
         head = document.head || document.getElementsByTagName('head')[0],
