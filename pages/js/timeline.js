@@ -1,3 +1,4 @@
+// Функция, симулирующая получение данных с сервера
 function fetchEvents(ms) {
     var events = [
         {
@@ -72,10 +73,7 @@ function fetchEvents(ms) {
     })
 }
 
-function checkForFirefox() {
-    return navigator.userAgent.slice(navigator.userAgent.length - 12, navigator.userAgent.length - 5) == 'Firefox'
-}
-
+// Определяю текущее время
 function determineTime() {
     var date = new Date()
     var hours = date.getHours()
@@ -90,6 +88,7 @@ function determineTime() {
     }
 }
 
+// Функция для преобразования данных типа Date в удобный мне формат
 function splitDate(date) {
     return {
         year: date.slice(0, 4),
@@ -103,6 +102,7 @@ function splitDate(date) {
     }
 }
 
+// Функция для высчитывания часов, затронутых эвентом
 function hoursIncluded(start, end) {
     var hours = []
     for (var i = start; i <= end; i++) {
@@ -111,6 +111,7 @@ function hoursIncluded(start, end) {
     return hours
 }
 
+// Обрабатываю полученные с сервера данные об эвентах
 function handleEventData(data) {
     var newData = []
     data.map(event => {
@@ -133,6 +134,7 @@ function handleEventData(data) {
     return newData
 }
 
+// Совмещаю уже обработанные данные об эвентах со временем так, чтобы было удобно рендерить таблицу
 function computeDataToRender(currentTime, events) {
     var data = []
     var handledData = handleEventData(events)
@@ -193,6 +195,7 @@ function computeDataToRender(currentTime, events) {
     return data
 }
 
+// Добавляю стили для вертикальной полосы, отображающей текущее время
 function addStyle(currentTime) {
     var css = `main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
                     margin-right: -${23 + parseInt(currentTime.minutes)}px;
@@ -250,8 +253,10 @@ function addStyle(currentTime) {
     head.appendChild(style)
 }
 
+// Рендерю таблицу с эвентами
 function renderTimelines(data, currentTime) {
     var render = ''
+    // Частично захардкоженная строка для рендера. В следующем задании это будет рендериться на основе существующих комнат
     data.map((item, index) => {
         var renderString = `
         <div class="time-area ta-${index} ${item.date == currentTime.time ? 'current' : ''}">
@@ -285,63 +290,45 @@ function renderTimelines(data, currentTime) {
     addStyle(currentTime)
     document.querySelector('.timeline').innerHTML = render
     data.map((item, index) => {
-        // console.log(item, index)
         if(item.events) {
             item.events.map((event, i) => {
                 if(item.date == event.hoursIncluded[0]) {
+                    // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).innerHTML = `<button class="select-room s s-${60 - event.start.time.minutes}">+</button>`
-                    if(event.id == 2) {
-                        console.log('____________')
-                        console.log('Ставлю начало Hackathon')
-                        console.log('s-', 60 - event.start.time.minutes)
-                        console.log('____________')
-                    }
+                    // Добавляю класс, чтобы определять все колонки, относящиеся к эвенту, для создания тултипа
+                    document.querySelector(`
+                    .ta-${index} .f-${event.floor} .r-${event.room.id}
+                    `).classList.add(`event-${event.id}`)
                 } else if (item.date == event.hoursIncluded[event.hoursIncluded.length - 1]) {
+                    // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).innerHTML = `<button class="select-room s s-${event.end.time.minutes}-r">+</button>`
-                    if (event.id == 2) {
-                        console.log('____________')
-                        console.log('Ставлю конец Hackathon')
-                        console.log('s-', event.start.time.minutes)
-                        console.log('____________')
-                    }
+                    document.querySelector(`
+                    .ta-${index} .f-${event.floor} .r-${event.room.id}
+                    `).classList.add(`event-${event.id}`)
                 } else {
+                    // Если целый час принадлежит эвенту, убираю кнопку
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).innerHTML = ''
+                    document.querySelector(`
+                    .ta-${index} .f-${event.floor} .r-${event.room.id}
+                    `).classList.add(`event-${event.id}`)
                 }
-
-
-
-                // if(event.hoursIncluded.length > 2) {
-                //     var button = document.createElement('button')
-                //     button.classList.add('select-room', 's', 's-60')
-                //     button.innerText = '+'
-                //     for (var i = 1; i < event.hoursIncluded.length - 2; i++) {
-                //         document.querySelector(`
-                //         .time-area:nth-of-type(${event.hoursIncluded[i]}) .f-${event.floor} .r-${event.room.id}
-                //         `).appendChild(button)
-                //     }
-                // }
-                // document.querySelector(`
-                // .time-area:nth-of-type(${event.hoursIncluded[event.hoursIncluded.length - 1]}) .f-${event.floor} .r-${event.room.id}
-                // `).innerHTML = `<button class="select-room s s-${event.end.time.minutes}>+</button>`
             })
         }
     })
-    // 
 }
 
+// Главная функция
 function setTimeline() {
     fetchEvents(0).then(res => {
         var currentTime = determineTime()
         var renderData = computeDataToRender(currentTime, res)
-        console.log(renderData)
         renderTimelines(renderData, currentTime)
-        console.log(document.querySelectorAll('button.select-room'))
     })
 }
 
