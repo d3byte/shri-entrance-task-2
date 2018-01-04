@@ -165,10 +165,6 @@ function computeDataToRender(currentTime, events) {
     }
     for (var i = currentTime.hours + 1; i < 24; i++) {
         var eventInfo = handledData.map(date => {
-            if(i == 15) {
-                console.log(date.hoursIncluded.includes(i))
-                console.log(date)
-            }
             if (date.hoursIncluded.includes(i))
                 return date
         })
@@ -179,10 +175,6 @@ function computeDataToRender(currentTime, events) {
     }
     for (var i = 0; i < data[0].date; i++) {
         var eventInfo = handledData.map(date => {
-            if (i == 15) {
-                console.log(date.hoursIncluded.includes(i))
-                console.log(date)
-            }
             if (date.hoursIncluded.includes(i))
                 return date
         })
@@ -292,7 +284,8 @@ function renderTimelines(data, currentTime) {
     data.map((item, index) => {
         if(item.events) {
             item.events.map((event, i) => {
-                if(item.date == event.hoursIncluded[0]) {
+                // console.log(event)
+                if(item.date.toString().slice(0, 2) == event.hoursIncluded[0]) {
                     // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
@@ -301,7 +294,7 @@ function renderTimelines(data, currentTime) {
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).classList.add(`event-${event.id}`)
-                } else if (item.date == event.hoursIncluded[event.hoursIncluded.length - 1]) {
+                } else if (item.date.toString().slice(0, 2) == event.hoursIncluded[event.hoursIncluded.length - 1]) {
                     // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
@@ -310,6 +303,10 @@ function renderTimelines(data, currentTime) {
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).classList.add(`event-${event.id}`)
                 } else {
+                    if (event.id == 3) {
+                        console.log(item.date)
+                        console.log(event.hoursIncluded)
+                    }
                     // Если целый час принадлежит эвенту, убираю кнопку
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}

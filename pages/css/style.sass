@@ -369,6 +369,7 @@ main.main-page
         .rows
           width: 100%
           .room
+            position: relative
             height: 35px
             background: $room-taken
             margin-bottom: 22px
@@ -388,3 +389,24 @@ main.main-page
               border-radius: 2px
               &:active
                 background: $room-pressed
+
+.tooltip
+  position: absolute
+  top: 35px
+  left: 0
+  z-index: 6000
+  background: white
+  border-radius: 8px
+  box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28)
+  height: 120px
+  width: 340px
+  &:before
+    content: ''
+    position: absolute
+    top: -5px
+    left: calc(50% - 5px)
+    background: white
+    border-radius: 2px
+    width: 15px
+    height: 15px
+    transform: rotate(135deg)

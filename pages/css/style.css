@@ -465,6 +465,7 @@ main.main-page .right-bar .timeline .time-area .rows {
 }
 
 main.main-page .right-bar .timeline .time-area .rows .room {
+  position: relative;
   height: 35px;
   background: #D5DFE9;
   margin-bottom: 22px;
@@ -492,5 +493,29 @@ main.main-page .right-bar .timeline .time-area .rows .room:hover > button {
 
 main.main-page .right-bar .timeline .time-area .rows .room:hover > button:active {
   background: #1D00FE;
+}
+
+.tooltip {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  z-index: 6000;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 16px 0 rgba(0, 44, 92, 0.28);
+  height: 120px;
+  width: 340px;
+}
+
+.tooltip:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
+  background: white;
+  border-radius: 2px;
+  width: 15px;
+  height: 15px;
+  transform: rotate(135deg);
 }
 /*# sourceMappingURL=style.css.map */
