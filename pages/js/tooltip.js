@@ -1,41 +1,3 @@
-// Функция для преобразования данных типа Date в удобный мне формат
-function splitDate(date) {
-    return {
-        year: date.slice(0, 4),
-        month: date.slice(5, 7),
-        day: date.slice(8, 10),
-        time: {
-            hours: date.slice(11, 13),
-            minutes: date.slice(14, 16),
-            seconds: date.slice(17, 19),
-        }
-    }
-}
-
-// Обрабатываю полученные с сервера данные об эвентах
-function handleEvents(data) {
-    var newData = []
-    data.map(event => {
-        let eventInfo = {
-            id: event.id,
-            title: event.title,
-            floor: event.room.floor,
-            room: {
-                id: event.room.id,
-                title: event.room.title,
-                capacity: event.room.capacity,
-                users: event.users
-            },
-            start: splitDate(event.dateStart),
-            end: splitDate(event.dateEnd),
-            hoursIncluded: hoursIncluded(event.dateStart.slice(11, 13), event.dateEnd.slice(11, 13)),
-            users: event.users
-        }
-        newData.push(eventInfo)
-    })
-    return newData
-}
-
 // Функция, симулирующая получение данных с сервера
 function fetchEvents(ms) {
     var events = [
@@ -106,7 +68,7 @@ function fetchEvents(ms) {
             }
         }
     ]
-    events = handleEvents(events)
+    events = handleEventData(events)
     return new Promise((resolve, reject) => {
         setTimeout(() => resolve(events), ms)
     })
@@ -177,7 +139,7 @@ function checkForContentOverlay({clientX, layerX}, tooltip) {
 }
  
 // Удаляю ранее активированный тултип
-function removePreviousTooltips() {
+function removePreviousTooltip() {
     var tooltip = document.querySelector('.tooltip'),
         active = document.querySelectorAll('.room.active')
     for(var i = 0; i < active.length; i++) {
@@ -190,7 +152,7 @@ function removePreviousTooltips() {
 
 // Основная функция, создающая тултип
 function createTooltip(e, event) {
-    removePreviousTooltips()
+    removePreviousTooltip()
     var tooltip = document.createElement('div'),
         amount = determineColAmount(event.id)
     tooltip.classList.add('tooltip')
@@ -227,15 +189,9 @@ function createTooltip(e, event) {
 
 // Ставлю обработчики эвентов на колонки
 fetchEvents(0).then(res => {
-    document.querySelectorAll('.event-1')[0].addEventListener('click', e => createTooltip(e,  res[0]))
-    document.querySelectorAll('.event-1')[1].addEventListener('click', e => createTooltip(e, res[0]))
-    document.querySelectorAll('.event-1')[2].addEventListener('click', e => createTooltip(e, res[0]))
-    document.querySelectorAll('.event-2')[0].addEventListener('click', e => createTooltip(e, res[1]))
-    document.querySelectorAll('.event-2')[1].addEventListener('click', e => createTooltip(e, res[1]))
-    document.querySelectorAll('.event-3')[0].addEventListener('click', e => createTooltip(e, res[2]))
-    document.querySelectorAll('.event-3')[1].addEventListener('click', e => createTooltip(e, res[2]))
-    document.querySelectorAll('.event-3')[2].addEventListener('click', e => createTooltip(e, res[2]))
-    document.querySelectorAll('.event-3')[3].addEventListener('click', e => createTooltip(e, res[2]))
-    document.querySelectorAll('.event-3')[4].addEventListener('click', e => createTooltip(e, res[2]))
-    document.querySelectorAll('.event-3')[5].addEventListener('click', e => createTooltip(e, res[0]))
+    res.map(item => {
+        item.hoursIncluded.map((hour, index) => {
+            document.querySelectorAll(`.event-${item.id}`)[index].addEventListener('click', e => createTooltip(e, item))
+        })
+    })
 })

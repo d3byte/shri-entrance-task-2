@@ -354,31 +354,31 @@ main.main-page .left-bar .floor-container .floor-num {
   color: #858E98;
 }
 
-main.main-page .left-bar .floor-container ul.floors {
+main.main-page .left-bar .floor-container ul.rooms {
   margin: 0;
   list-style-type: none;
 }
 
-main.main-page .left-bar .floor-container ul.floors li.floor {
+main.main-page .left-bar .floor-container ul.rooms li.room {
   padding: 8px 0;
   line-height: 20px;
 }
 
-main.main-page .left-bar .floor-container ul.floors li.floor .title {
+main.main-page .left-bar .floor-container ul.rooms li.room .title {
   font-size: 16px;
   font-weight: bold;
 }
 
-main.main-page .left-bar .floor-container ul.floors li.floor .capacity {
+main.main-page .left-bar .floor-container ul.rooms li.room .capacity {
   font-size: 14px;
   font-weight: normal;
 }
 
-main.main-page .left-bar .floor-container ul.floors li.floor.disabled > span {
+main.main-page .left-bar .floor-container ul.rooms li.room.disabled > span {
   color: #858E98;
 }
 
-main.main-page .left-bar .floor-container ul.floors li.floor.active > .title {
+main.main-page .left-bar .floor-container ul.rooms li.room.active > .title {
   color: #0070E0;
 }
 
