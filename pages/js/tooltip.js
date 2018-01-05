@@ -117,10 +117,10 @@ function determineColAmount(eventId) {
     return amount
 }
 
-function positionArrow(e) {
+function positionArrow({layerX}, right) {
     var css = `
         .tooltip:before {
-            left: ${e.layerX}px !important;
+            left: ${layerX}px !important;
         }
     `,
         head = document.head || document.getElementsByTagName('head')[0],
@@ -151,13 +151,45 @@ function monthNumToText(number) {
     return months[number - 1]
 }
 
+function checkForContentOverlay({clientX, layerX}, tooltip) {
+    var leftBarWidth = window.getComputedStyle(document.querySelector('.left-bar'), null).getPropertyValue('width'),
+        screenWidth = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth
+    // 350 - размер тултипа с запасом в 10px
+    if(screenWidth - clientX < 340) {
+        var difference = Math.abs(340 - (screenWidth - clientX))
+        var offset = layerX + difference
+        if (offset > 340)
+            offset = 320
+        tooltip.style.left = '-' + difference + 'px'
+        positionArrow({ layerX: offset })
+    } else if (clientX - parseInt(leftBarWidth) < 30) {
+        var difference = Math.abs(35 - (clientX - parseInt(leftBarWidth)))
+        tooltip.style.left = + difference + 'px'
+        positionArrow({ layerX: Math.abs(layerX - difference)})
+    }
+}
+
+function removePreviousTooltips() {
+    var tooltip = document.querySelector('.tooltip'),
+        active = document.querySelectorAll('.room.active')
+    for(var i = 0; i < active.length; i++) {
+        active[i].classList.remove('active')
+    }
+    if (tooltip) {
+        tooltip.remove()
+    }
+}
+
 function createTooltip(e, event) {
-    console.log(event)
+    removePreviousTooltips()
     var tooltip = document.createElement('div'),
         amount = determineColAmount(event.id)
     tooltip.classList.add('tooltip')
-    positionArrow(e)
     highlightEventCols(event.id, amount)
+    positionArrow(e)
+    checkForContentOverlay(e, tooltip)
     tooltip.innerHTML = `
         <div class="header">
             <span class="title">${event.title}</span>
@@ -190,6 +222,8 @@ fetchEvents(0).then(res => {
     document.querySelectorAll('.event-1')[0].addEventListener('click', e => createTooltip(e,  res[0]))
     document.querySelectorAll('.event-1')[1].addEventListener('click', e => createTooltip(e, res[0]))
     document.querySelectorAll('.event-1')[2].addEventListener('click', e => createTooltip(e, res[0]))
+    document.querySelectorAll('.event-2')[0].addEventListener('click', e => createTooltip(e, res[1]))
+    document.querySelectorAll('.event-2')[1].addEventListener('click', e => createTooltip(e, res[1]))
 })
 
 
