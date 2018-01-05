@@ -112,11 +112,13 @@ function fetchEvents(ms) {
     })
 }
 
+// Определяю количество колонок, принадлежащих эвенту
 function determineColAmount(eventId) {
     var amount = document.querySelectorAll(`.event-${eventId}`).length
     return amount
 }
 
+// Позиционирую стрелочку тултипа
 function positionArrow({layerX}, right) {
     var css = `
         .tooltip:before {
@@ -135,12 +137,14 @@ function positionArrow({layerX}, right) {
     head.appendChild(style)
 }
 
+// Подсвечиваю колонки, принадлежащие эвенту
 function highlightEventCols(id, amount) {
     for(var i = 0; i < amount; i++) {
         document.querySelectorAll(`.event-${id}`)[i].classList.add('active')
     }
 }
 
+// Преобразую номер месяца в текстовый эквивалент
 function monthNumToText(number) {
     const months = [
         'января', 'февраля', 'марта', 
@@ -151,6 +155,7 @@ function monthNumToText(number) {
     return months[number - 1]
 }
 
+// Проверяю, помещается ли тултип на экране. Если нет - вношу коррективы в позиционирование
 function checkForContentOverlay({clientX, layerX}, tooltip) {
     var leftBarWidth = window.getComputedStyle(document.querySelector('.left-bar'), null).getPropertyValue('width'),
         screenWidth = window.innerWidth
@@ -170,7 +175,8 @@ function checkForContentOverlay({clientX, layerX}, tooltip) {
         positionArrow({ layerX: Math.abs(layerX - difference)})
     }
 }
-
+ 
+// Удаляю ранее активированный тултип
 function removePreviousTooltips() {
     var tooltip = document.querySelector('.tooltip'),
         active = document.querySelectorAll('.room.active')
@@ -182,6 +188,7 @@ function removePreviousTooltips() {
     }
 }
 
+// Основная функция, создающая тултип
 function createTooltip(e, event) {
     removePreviousTooltips()
     var tooltip = document.createElement('div'),
@@ -218,12 +225,17 @@ function createTooltip(e, event) {
     e.target.appendChild(tooltip)
 }
 
+// Ставлю обработчики эвентов на колонки
 fetchEvents(0).then(res => {
     document.querySelectorAll('.event-1')[0].addEventListener('click', e => createTooltip(e,  res[0]))
     document.querySelectorAll('.event-1')[1].addEventListener('click', e => createTooltip(e, res[0]))
     document.querySelectorAll('.event-1')[2].addEventListener('click', e => createTooltip(e, res[0]))
     document.querySelectorAll('.event-2')[0].addEventListener('click', e => createTooltip(e, res[1]))
     document.querySelectorAll('.event-2')[1].addEventListener('click', e => createTooltip(e, res[1]))
+    document.querySelectorAll('.event-3')[0].addEventListener('click', e => createTooltip(e, res[2]))
+    document.querySelectorAll('.event-3')[1].addEventListener('click', e => createTooltip(e, res[2]))
+    document.querySelectorAll('.event-3')[2].addEventListener('click', e => createTooltip(e, res[2]))
+    document.querySelectorAll('.event-3')[3].addEventListener('click', e => createTooltip(e, res[2]))
+    document.querySelectorAll('.event-3')[4].addEventListener('click', e => createTooltip(e, res[2]))
+    document.querySelectorAll('.event-3')[5].addEventListener('click', e => createTooltip(e, res[0]))
 })
-
-
