@@ -11,6 +11,11 @@ $room-hover: #1D54FE
 $room-pressed: #1D00FE
 $column-show-tooltip: #99A9B9
 
+
+
+=shadow
+  box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28)
+
 =no-outline
   outline: 0 none
   -webkit-box-shadow: none
@@ -281,118 +286,164 @@ a.button-wrapper
 main.main-page
   display: flex
   flex-flow: row nowrap
-  .left-bar
-    width: 305px
-    .date
-      +flex-vertical-center
-      padding: 10px 0 10px 25px
-      width: 100%
-      box-shadow: 0 1px 0 0 $light-gray
-      & > .icon-container:first-of-type
-          margin-right: 20px
-      & > h5
-        margin: 0 20px 0 0
-        &:hover
-          cursor: pointer
-    .floor-container
-      border-right: 1px solid $light-gray
-      padding: 30px 25px 0 25px
-      .floor-num
-        font-size: 12px
-        text-transform: uppercase
-        color: $dark-gray
-      ul.rooms
+
+.left-bar
+  position: relative
+  width: 305px
+  .date
+    +flex-vertical-center
+    padding: 10px 0 10px 25px
+    width: 100%
+    box-shadow: 0 1px 0 0 $light-gray
+    & > .icon-container:first-of-type
+        margin-right: 20px
+    & > h5
+      margin: 0 20px 0 0
+      &:hover
+        cursor: pointer
+  .floor-container
+    border-right: 1px solid $light-gray
+    padding: 30px 25px 0 25px
+    .floor-num
+      font-size: 12px
+      text-transform: uppercase
+      color: $dark-gray
+    ul.rooms
+      margin: 0
+      list-style-type: none
+      li.room
+        padding: 8px 0
+        line-height: 20px
+        .title
+          font-size: 16px
+          font-weight: bold
+        .capacity
+          font-size: 14px
+          font-weight: normal
+        &.disabled > span
+          color: $dark-gray
+        &.active > .title
+          color: $text-blue
+
+.calendar
+  position: absolute
+  left: 25px
+  top: 50px
+  width: 605px
+  height: 230px
+  background: white
+  border-radius: 4px
+  padding: 16px
+  +shadow
+  z-index: 7000
+  .wrapper
+    +flex-vertical-center
+    justify-content: center
+    background: $light-gray
+    width: 100%
+    height: 100%
+    .month
+      text-align: center
+      margin-right: 30px
+      transform: scale(0.9)
+      &:first-of-type, &:last-of-type
+        transform: scale(0.8)
+      &:last-of-type
         margin: 0
-        list-style-type: none
-        li.room
-          padding: 8px 0
-          line-height: 20px
-          .title
-            font-size: 16px
+      .name
+        font-weight: bold
+        margin-bottom: 5px
+      table
+        margin: 0
+        td
+          padding: 2px 4px
+          border: none
+          &:hover
+            cursor: pointer
+          &.today
+            background: #98A9B9
             font-weight: bold
-          .capacity
-            font-size: 14px
-            font-weight: normal
-          &.disabled > span
-            color: $dark-gray
-          &.active > .title
-            color: $text-blue
-  .right-bar
-    overflow-x: scroll
-    width: calc(100% - 305px)
-    .timeline
-      +flex-vertical-center
-      width: 100%
-      .time-area
-        flex: 0 0 60px
-        white-space: nowrap
-        &:first-of-type
-          margin-left: -25px
-        &.current
-          position: relative
-          .timing
-            position: relative
-            & > .hours
-              position: absolute
-              right: 0
-            & > span:last-of-type
-              display: block
-              padding: 0 10px
-              border-radius: 100px
-              color: white
-              background: $light-blue
-              z-index: 5000
-        .floors
-          display: flex
-          flex-direction: column
-          margin-top: 1px
-          background: $li-gray
-          border-right: 1px solid $column-border-color
+            color: white
+            border-radius: 4px
+
+.right-bar
+  overflow-x: scroll
+  width: calc(100% - 305px)
+  .timeline
+    +flex-vertical-center
+    width: 100%
+    .time-area
+      flex: 0 0 60px
+      white-space: nowrap
+      &:first-of-type
+        margin-left: -25px
+      &.current
+        position: relative
         .timing
-          +flex-vertical-center
-          justify-content: left
-          padding: 10px 0
-          height: 50px
-          box-shadow: 0 1px 0 0 $light-gray
-          border-top: 1px solid $light-gray
-          background: white
-          & > span
-            margin-right: -4px
-            font-weight: bold
-            font-size: 10px
-            color: $dark-gray
-            z-index: 1000
-          & + .floors .floor:first-of-type .room:first-of-type
-            margin-top: 65px
-        .floor
-          margin-bottom: 72px
-          background: $li-gray
-        .rows
-          width: 100%
-          .room
-            position: relative
-            height: 35px
-            background: $room-taken
-            margin-bottom: 22px
+          position: relative
+          & > .hours
+            position: absolute
+            right: 0
+          & > span:last-of-type
+            display: block
+            padding: 0 10px
+            border-radius: 100px
+            color: white
+            background: $light-blue
+            z-index: 5000
+      .floors
+        display: flex
+        flex-direction: column
+        margin-top: 1px
+        background: $li-gray
+        border-right: 1px solid $column-border-color
+      .timing
+        +flex-vertical-center
+        justify-content: left
+        padding: 10px 0
+        height: 50px
+        box-shadow: 0 1px 0 0 $light-gray
+        border-top: 1px solid $light-gray
+        background: white
+        & > span
+          margin-right: -4px
+          font-weight: bold
+          font-size: 10px
+          color: $dark-gray
+          z-index: 1000
+        & + .floors .floor:first-of-type .room:first-of-type
+          margin-top: 65px
+      .floor
+        margin-bottom: 72px
+        background: $li-gray
+      .rows
+        width: 100%
+        .room
+          position: relative
+          height: 35px
+          background: $room-taken
+          margin-bottom: 22px
+          transition: 0.2s
+          &:last-of-type
+            margin-bottom: 0
+          & > button
             transition: 0.2s
-            &:last-of-type
-              margin-bottom: 0
-            & > button
-              transition: 0.2s
-              width: 100%
-              min-height: 35px
-              padding: 0
-              background: white
-              border: none
-              border-radius: 0
-            &:hover > button
-              cursor: pointer
-              background: $room-hover
-              border-radius: 2px
-              &:active
-                background: $room-pressed
-            &.active
-              background: $column-show-tooltip
+            width: 100%
+            min-height: 35px
+            padding: 0
+            background: white
+            border: none
+            border-radius: 0
+          &:hover > button
+            cursor: pointer
+            background: $room-hover
+            border-radius: 2px
+            &:active
+              background: $room-pressed
+          &.active
+            background: $column-show-tooltip
+
+
 
 .tooltip
   position: absolute
@@ -401,7 +452,7 @@ main.main-page
   z-index: 6000
   background: white
   border-radius: 8px
-  box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28)
+  +shadow
   height: 120px
   width: 340px
   padding: 8px 16px
@@ -433,7 +484,7 @@ main.main-page
       width: 24px
       height: 24px
       border-radius: 50%
-      border: 1px solid $light-gray
+      border: 1px solid $light-gray 
       margin-right: 5px
     span
       font-weight: normal
@@ -451,3 +502,5 @@ main.main-page
     width: 15px
     height: 15px
     transform: rotate(135deg)
+
+  

@@ -319,11 +319,12 @@ main.main-page {
   flex-flow: row nowrap;
 }
 
-main.main-page .left-bar {
+.left-bar {
+  position: relative;
   width: 305px;
 }
 
-main.main-page .left-bar .date {
+.left-bar .date {
   display: flex;
   align-items: center;
   padding: 10px 0 10px 25px;
@@ -331,91 +332,152 @@ main.main-page .left-bar .date {
   box-shadow: 0 1px 0 0 #E9ECEF;
 }
 
-main.main-page .left-bar .date > .icon-container:first-of-type {
+.left-bar .date > .icon-container:first-of-type {
   margin-right: 20px;
 }
 
-main.main-page .left-bar .date > h5 {
+.left-bar .date > h5 {
   margin: 0 20px 0 0;
 }
 
-main.main-page .left-bar .date > h5:hover {
+.left-bar .date > h5:hover {
   cursor: pointer;
 }
 
-main.main-page .left-bar .floor-container {
+.left-bar .floor-container {
   border-right: 1px solid #E9ECEF;
   padding: 30px 25px 0 25px;
 }
 
-main.main-page .left-bar .floor-container .floor-num {
+.left-bar .floor-container .floor-num {
   font-size: 12px;
   text-transform: uppercase;
   color: #858E98;
 }
 
-main.main-page .left-bar .floor-container ul.rooms {
+.left-bar .floor-container ul.rooms {
   margin: 0;
   list-style-type: none;
 }
 
-main.main-page .left-bar .floor-container ul.rooms li.room {
+.left-bar .floor-container ul.rooms li.room {
   padding: 8px 0;
   line-height: 20px;
 }
 
-main.main-page .left-bar .floor-container ul.rooms li.room .title {
+.left-bar .floor-container ul.rooms li.room .title {
   font-size: 16px;
   font-weight: bold;
 }
 
-main.main-page .left-bar .floor-container ul.rooms li.room .capacity {
+.left-bar .floor-container ul.rooms li.room .capacity {
   font-size: 14px;
   font-weight: normal;
 }
 
-main.main-page .left-bar .floor-container ul.rooms li.room.disabled > span {
+.left-bar .floor-container ul.rooms li.room.disabled > span {
   color: #858E98;
 }
 
-main.main-page .left-bar .floor-container ul.rooms li.room.active > .title {
+.left-bar .floor-container ul.rooms li.room.active > .title {
   color: #0070E0;
 }
 
-main.main-page .right-bar {
+.calendar {
+  position: absolute;
+  left: 25px;
+  top: 50px;
+  width: 605px;
+  height: 230px;
+  background: white;
+  border-radius: 4px;
+  padding: 16px;
+  box-shadow: 0 1px 16px 0 rgba(0, 44, 92, 0.28);
+  z-index: 7000;
+}
+
+.calendar .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #E9ECEF;
+  width: 100%;
+  height: 100%;
+}
+
+.calendar .wrapper .month {
+  text-align: center;
+  margin-right: 30px;
+  transform: scale(0.9);
+}
+
+.calendar .wrapper .month:first-of-type, .calendar .wrapper .month:last-of-type {
+  transform: scale(0.8);
+}
+
+.calendar .wrapper .month:last-of-type {
+  margin: 0;
+}
+
+.calendar .wrapper .month .name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.calendar .wrapper .month table {
+  margin: 0;
+}
+
+.calendar .wrapper .month table td {
+  padding: 2px 4px;
+  border: none;
+}
+
+.calendar .wrapper .month table td:hover {
+  cursor: pointer;
+}
+
+.calendar .wrapper .month table td.today {
+  background: #98A9B9;
+  font-weight: bold;
+  color: white;
+  border-radius: 4px;
+}
+
+.right-bar {
   overflow-x: scroll;
   width: calc(100% - 305px);
 }
 
-main.main-page .right-bar .timeline {
+.right-bar .timeline {
   display: flex;
   align-items: center;
   width: 100%;
 }
 
-main.main-page .right-bar .timeline .time-area {
+.right-bar .timeline .time-area {
   flex: 0 0 60px;
   white-space: nowrap;
 }
 
-main.main-page .right-bar .timeline .time-area:first-of-type {
+.right-bar .timeline .time-area:first-of-type {
   margin-left: -25px;
 }
 
-main.main-page .right-bar .timeline .time-area.current {
+.right-bar .timeline .time-area.current {
   position: relative;
 }
 
-main.main-page .right-bar .timeline .time-area.current .timing {
+.right-bar .timeline .time-area.current .timing {
   position: relative;
 }
 
-main.main-page .right-bar .timeline .time-area.current .timing > .hours {
+.right-bar .timeline .time-area.current .timing > .hours {
   position: absolute;
   right: 0;
 }
 
-main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-type {
+.right-bar .timeline .time-area.current .timing > span:last-of-type {
   display: block;
   padding: 0 10px;
   border-radius: 100px;
@@ -424,7 +486,7 @@ main.main-page .right-bar .timeline .time-area.current .timing > span:last-of-ty
   z-index: 5000;
 }
 
-main.main-page .right-bar .timeline .time-area .floors {
+.right-bar .timeline .time-area .floors {
   display: flex;
   flex-direction: column;
   margin-top: 1px;
@@ -432,7 +494,7 @@ main.main-page .right-bar .timeline .time-area .floors {
   border-right: 1px solid rgba(19, 100, 205, 0.1);
 }
 
-main.main-page .right-bar .timeline .time-area .timing {
+.right-bar .timeline .time-area .timing {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -443,7 +505,7 @@ main.main-page .right-bar .timeline .time-area .timing {
   background: white;
 }
 
-main.main-page .right-bar .timeline .time-area .timing > span {
+.right-bar .timeline .time-area .timing > span {
   margin-right: -4px;
   font-weight: bold;
   font-size: 10px;
@@ -451,20 +513,20 @@ main.main-page .right-bar .timeline .time-area .timing > span {
   z-index: 1000;
 }
 
-main.main-page .right-bar .timeline .time-area .timing + .floors .floor:first-of-type .room:first-of-type {
+.right-bar .timeline .time-area .timing + .floors .floor:first-of-type .room:first-of-type {
   margin-top: 65px;
 }
 
-main.main-page .right-bar .timeline .time-area .floor {
+.right-bar .timeline .time-area .floor {
   margin-bottom: 72px;
   background: #F6F7F9;
 }
 
-main.main-page .right-bar .timeline .time-area .rows {
+.right-bar .timeline .time-area .rows {
   width: 100%;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room {
+.right-bar .timeline .time-area .rows .room {
   position: relative;
   height: 35px;
   background: #D5DFE9;
@@ -472,11 +534,11 @@ main.main-page .right-bar .timeline .time-area .rows .room {
   transition: 0.2s;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room:last-of-type {
+.right-bar .timeline .time-area .rows .room:last-of-type {
   margin-bottom: 0;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room > button {
+.right-bar .timeline .time-area .rows .room > button {
   transition: 0.2s;
   width: 100%;
   min-height: 35px;
@@ -486,17 +548,17 @@ main.main-page .right-bar .timeline .time-area .rows .room > button {
   border-radius: 0;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room:hover > button {
+.right-bar .timeline .time-area .rows .room:hover > button {
   cursor: pointer;
   background: #1D54FE;
   border-radius: 2px;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room:hover > button:active {
+.right-bar .timeline .time-area .rows .room:hover > button:active {
   background: #1D00FE;
 }
 
-main.main-page .right-bar .timeline .time-area .rows .room.active {
+.right-bar .timeline .time-area .rows .room.active {
   background: #99A9B9;
 }
 
