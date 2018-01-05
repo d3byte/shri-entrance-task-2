@@ -13,7 +13,7 @@ function highlightRoom(element) {
 
 // Убрать подсветку комнаты
 function stopHighlighting(e, event) {
-    var activeFloor = document.querySelector('.room.active')
+    var activeFloor = document.querySelector('.floor-container .room.active')
     if(activeFloor) {
         activeFloor.classList.remove('active')
     }
