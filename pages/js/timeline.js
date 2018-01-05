@@ -4,7 +4,7 @@ function fetchEvents(ms) {
         {
             "id": "1",
             "title": "ШРИ 2018 - начало",
-            "dateStart": "2017-12-28T13:57:23.309Z",
+            "dateStart": "2017-12-28T12:16:23.309Z",
             "dateEnd": "2017-12-28T14:57:23.309Z",
             "users": [
                 {
@@ -49,7 +49,7 @@ function fetchEvents(ms) {
             "id": "3",
             "title": "🍨 Пробуем kefir.js",
             "dateStart": "2017-12-28T16:57:23.309Z",
-            "dateEnd": "2017-12-28T18:57:23.309Z",
+            "dateEnd": "2017-12-28T21:57:23.309Z",
             "users": [
                 {
                     "id": "1",
@@ -98,7 +98,7 @@ function splitDate(date) {
             hours: date.slice(11, 13),
             minutes: date.slice(14, 16),
             seconds: date.slice(17, 19),
-        }
+        },
     }
 }
 
@@ -284,7 +284,6 @@ function renderTimelines(data, currentTime) {
     data.map((item, index) => {
         if(item.events) {
             item.events.map((event, i) => {
-                // console.log(event)
                 if(item.date.toString().slice(0, 2) == event.hoursIncluded[0]) {
                     // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
@@ -303,10 +302,6 @@ function renderTimelines(data, currentTime) {
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).classList.add(`event-${event.id}`)
                 } else {
-                    if (event.id == 3) {
-                        console.log(item.date)
-                        console.log(event.hoursIncluded)
-                    }
                     // Если целый час принадлежит эвенту, убираю кнопку
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}

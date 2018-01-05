@@ -469,6 +469,7 @@ main.main-page .right-bar .timeline .time-area .rows .room {
   height: 35px;
   background: #D5DFE9;
   margin-bottom: 22px;
+  transition: 0.2s;
 }
 
 main.main-page .right-bar .timeline .time-area .rows .room:last-of-type {
@@ -495,6 +496,10 @@ main.main-page .right-bar .timeline .time-area .rows .room:hover > button:active
   background: #1D00FE;
 }
 
+main.main-page .right-bar .timeline .time-area .rows .room.active {
+  background: #99A9B9;
+}
+
 .tooltip {
   position: absolute;
   top: 35px;
@@ -505,6 +510,69 @@ main.main-page .right-bar .timeline .time-area .rows .room:hover > button:active
   box-shadow: 0 1px 16px 0 rgba(0, 44, 92, 0.28);
   height: 120px;
   width: 340px;
+  padding: 8px 16px;
+}
+
+.tooltip .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tooltip .header .title {
+  display: block;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.tooltip .header .icon-container {
+  width: 24px;
+  height: 24px;
+}
+
+.tooltip .header .icon-container img {
+  width: 10px;
+  height: 10px;
+}
+
+.tooltip .time {
+  margin-top: 2px;
+}
+
+.tooltip .time span {
+  font-size: 14px;
+}
+
+.tooltip .time span.dot {
+  margin: 0 5px;
+}
+
+.tooltip .participants {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.tooltip .participants .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #E9ECEF;
+  margin-right: 5px;
+}
+
+.tooltip .participants span {
+  font-weight: normal;
+  font-size: 14px;
+  margin-right: 5px;
+}
+
+.tooltip .participants span.left {
+  color: gray;
 }
 
 .tooltip:before {

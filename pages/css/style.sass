@@ -9,6 +9,7 @@ $column-border-color: rgba(19,100,205,0.10)
 $room-taken: #D5DFE9
 $room-hover: #1D54FE
 $room-pressed: #1D00FE
+$column-show-tooltip: #99A9B9
 
 =no-outline
   outline: 0 none
@@ -373,6 +374,7 @@ main.main-page
             height: 35px
             background: $room-taken
             margin-bottom: 22px
+            transition: 0.2s
             &:last-of-type
               margin-bottom: 0
             & > button
@@ -389,6 +391,8 @@ main.main-page
               border-radius: 2px
               &:active
                 background: $room-pressed
+            &.active
+              background: $column-show-tooltip
 
 .tooltip
   position: absolute
@@ -400,6 +404,43 @@ main.main-page
   box-shadow: 0 1px 16px 0 rgba(0,44,92,0.28)
   height: 120px
   width: 340px
+  padding: 8px 16px
+  .header
+    +flex-vertical-center
+    justify-content: space-between
+    .title
+      display: block
+      font-weight: bold
+      font-size: 16px
+      margin-top: 8px
+    .icon-container
+      width: 24px
+      height: 24px
+      img
+        width: 10px
+        height: 10px
+  .time
+    margin-top: 2px
+    span
+      font-size: 14px
+      &.dot
+        margin: 0 5px
+  .participants
+    +flex-vertical-center
+    margin-top: 15px
+    .avatar
+      +centered
+      width: 24px
+      height: 24px
+      border-radius: 50%
+      border: 1px solid $light-gray
+      margin-right: 5px
+    span
+      font-weight: normal
+      font-size: 14px
+      margin-right: 5px
+      &.left
+        color: gray
   &:before
     content: ''
     position: absolute
