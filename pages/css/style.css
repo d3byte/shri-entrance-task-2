@@ -90,14 +90,6 @@ footer {
   border-color: #007DFF;
 }
 
-.labeled-input input:focus + .input-dropdown {
-  display: block;
-}
-
-.labeled-input input:focus + .input-dropdown + .invited-people {
-  display: none;
-}
-
 .input-date {
   display: flex;
   align-items: center;
@@ -135,11 +127,10 @@ footer {
 .input-dropdown {
   width: 100%;
   max-height: 150px;
-  margin-top: 0.5px;
+  margin-top: -0.5px;
   box-shadow: 0px 6px 10px  #E9ECEF, 4px 4px 10px  #E9ECEF, -4px 6px 10px  #E9ECEF;
   border-radius: 4px;
   overflow-y: scroll;
-  display: none;
 }
 
 .input-dropdown ul.people {
@@ -175,11 +166,11 @@ footer {
   color: black;
 }
 
-.input-dropdown ul.people li.person:hover {
+.input-dropdown ul.people li.person:hover, .input-dropdown ul.people li.person.suitable {
   background: #F6F7F9;
 }
 
-.input-dropdown ul.people li.person:hover span {
+.input-dropdown ul.people li.person:hover span, .input-dropdown ul.people li.person.suitable span {
   font-weight: bold;
 }
 

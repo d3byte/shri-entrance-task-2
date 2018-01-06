@@ -57,39 +57,29 @@
                     <div class="labeled-input participants">
                         <label>Участники</label>
                         <input type="text" placeholder="Например, Тор Одинович">
-                        <div class="input-dropdown">
+                        <div class="input-dropdown hide">
                             <ul class="people">
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Лекс Лютер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">7 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Томас Андерсон</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">2 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Дарт Вейдер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">1 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Кларк Кент</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">2 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Лекс Лютер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">7 этаж</span>
-                                </li>
                             </ul>
+                        </div>
+                        <div class="invited-people">
+                            <!-- <div class="invited-person p-1">
+                                <div class="person-wrapper">
+                                    <img src="desktop-assets/close-white.svg" class="avatar"> Лекс Лютер
+                                </div>
+                                <img src="desktop-assets/close.svg" class="icon">
+                            </div>
+                            <div class="invited-person p-3">
+                                <div class="person-wrapper">
+                                    <img src="desktop-assets/close-white.svg" class="avatar"> Дарт Вейдер
+                                </div>
+                                <img onclick="removeUser({ id: 3, name: 'Дарт Вейдер', floor: 1 })" src="desktop-assets/close.svg" class="icon">
+                            </div>
+                            <div class="invited-person p-4">
+                                <div class="person-wrapper">
+                                    <img src="desktop-assets/close-white.svg" class="avatar"> Кларк Кент
+                                </div>
+                                <img src="desktop-assets/close.svg" class="icon">
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -134,6 +124,7 @@
     </footer>
 
     <script src="js/choose-room.js"></script>
+    <script src="js/input-person.js"></script>
 
 </body>
 
