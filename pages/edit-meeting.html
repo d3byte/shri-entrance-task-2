@@ -117,15 +117,39 @@
                     </div>
                 </div>
 
-                <div class="row-col">
-                    <div class="labeled-room">
+                <div class="row-col room-interface">
+                    <div class="labeled-room active">
                         <label>Ваша переговорка</label>
                         <div class="room">
                             <div class="info">
                                 <span class="time">16:00–16:30</span>
                                 <span class="location">Готем &#183; 4 этаж</span>
                             </div>
-                            <img src="desktop-assets/close-white.svg">
+                            <img src="desktop-assets/close-white.svg" onclick="cancelRoom()">
+                        </div>
+                    </div>
+                    <div class="labeled-room list hide">
+                        <label>Ваша переговорка</label>
+                        <div class="room" onclick="chooseRoom({title: 'Готем', floor: 4})">
+                            <div class="info">
+                                <span class="time">16:00–16:30</span>
+                                <span class="location">Готем &#183; 4 этаж</span>
+                            </div>
+                            <img src="desktop-assets/close.svg">
+                        </div>
+                        <div class="room" onclick="chooseRoom({title: 'Поле непаханное', floor: 4})">
+                            <div class="info">
+                                <span class="time">16:00–16:30</span>
+                                <span class="location">Поле непаханное &#183; 4 этаж</span>
+                            </div>
+                            <img src="desktop-assets/close.svg">
+                        </div>
+                        <div class="room" onclick="chooseRoom({title: 'Тёмная башня', floor: 4})">
+                            <div class="info">
+                                <span class="time">16:00–16:30</span>
+                                <span class="location">Тёмная башня &#183; 4 этаж</span>
+                            </div>
+                            <img src="desktop-assets/close.svg">
                         </div>
                     </div>
                 </div>
@@ -156,6 +180,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="js/kube.min.js"></script>
+    <script src="js/choose-room.js"></script>
+
 </body>
 
 </html>

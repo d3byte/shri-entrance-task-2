@@ -227,30 +227,46 @@ footer {
   font-weight: bold;
 }
 
-.labeled-room > .room {
+.labeled-room .room {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   height: 36px;
-  background: #007DFF;
   border-radius: 4px;
 }
 
-.labeled-room > .room .info > span {
+.labeled-room .room .info > span {
   font-size: 14px;
   color: white;
   font-weight: normal;
   font-family: 'Roboto', sans-serif;
 }
 
-.labeled-room > .room .info > .time {
+.labeled-room .room .info > .time {
   font-weight: bold;
   margin-right: 15px;
 }
 
-.labeled-room > .room img {
+.labeled-room .room img {
   margin-right: 4px;
+}
+
+.labeled-room .room:hover {
+  cursor: pointer;
+}
+
+.labeled-room.list > .room {
+  background: #E9ECEF;
+  margin-bottom: 10px;
+}
+
+.labeled-room.list > .room span {
+  color: black;
+}
+
+.labeled-room.active > .room {
+  background: #007DFF;
 }
 
 button.button {

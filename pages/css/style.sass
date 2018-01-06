@@ -219,11 +219,10 @@ footer
 .labeled-room
   label
     font-weight: bold
-  & > .room
+  .room
     +space-between
     padding: 10px
     height: 36px
-    background: $light-blue
     border-radius: 4px
     .info
       & > span
@@ -236,8 +235,17 @@ footer
         margin-right: 15px
     img
       margin-right: 4px
+    &:hover
+      cursor: pointer
+  &.list > .room
+    background: $light-gray
+    margin-bottom: 10px
+    span
+      color: black
+  &.active > .room
+    background: $light-blue
 
-
+    
 
 button.button
   transition: 0.2s
