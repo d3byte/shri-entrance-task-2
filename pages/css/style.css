@@ -14,12 +14,16 @@ header.main-page {
 }
 
 footer {
-  position: fixed;
   width: 100%;
-  bottom: 0;
-  left: 0;
   justify-content: center;
   box-shadow: 0 -1px 0 0 #E9ECEF;
+}
+
+.footer-to-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .container {
@@ -90,10 +94,16 @@ footer {
   border-color: #007DFF;
 }
 
+.labeled-input.time > input {
+  padding: 2px 0;
+  text-align: center;
+}
+
 .input-date {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .input-date .labeled-input.date {
@@ -162,7 +172,7 @@ footer {
   vertical-align: middle;
 }
 
-.input-dropdown ul.people li.person span.dot {
+.input-dropdown ul.people li.person span.dot, .input-dropdown ul.people li.person span.name {
   color: black;
 }
 
@@ -195,6 +205,7 @@ footer {
   display: flex;
   align-items: center;
   font-size: 14px;
+  color: black;
 }
 
 .invited-people .invited-person .person-wrapper img.avatar {
@@ -244,6 +255,14 @@ footer {
 }
 
 .labeled-room .room:hover {
+  cursor: pointer;
+}
+
+.labeled-room.active .room:hover {
+  cursor: default;
+}
+
+.labeled-room.active .room > img:hover {
   cursor: pointer;
 }
 
@@ -329,6 +348,7 @@ main.main-page {
 .left-bar {
   position: relative;
   width: 305px;
+  transition: 0.3s;
 }
 
 .left-bar .date {
@@ -403,6 +423,17 @@ main.main-page {
   z-index: 7000;
 }
 
+.calendar.editor {
+  top: 70px;
+  left: 0;
+  width: 250px;
+  height: 200px;
+}
+
+.calendar.editor .month:first-of-type {
+  transform: scale(0.9) !important;
+}
+
 .calendar .wrapper {
   display: flex;
   align-items: center;
@@ -426,7 +457,7 @@ main.main-page {
   margin: 0;
 }
 
-.calendar .wrapper .month .name {
+.calendar .wrapper .month .month-name {
   font-weight: bold;
   margin-bottom: 5px;
 }
@@ -525,8 +556,25 @@ main.main-page {
 }
 
 .right-bar .timeline .time-area .floor {
+  position: relative;
   margin-bottom: 72px;
   background: #F6F7F9;
+}
+
+.right-bar .timeline .time-area .floor span.floor-num {
+  display: none;
+  position: absolute;
+  left: 10px;
+  top: -25px;
+  z-index: 5000;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #858E98;
+}
+
+.right-bar .timeline .time-area .floor:first-of-type > span.floor-num {
+  top: 20px;
 }
 
 .right-bar .timeline .time-area .rows {
@@ -545,24 +593,36 @@ main.main-page {
   margin-bottom: 0;
 }
 
-.right-bar .timeline .time-area .rows .room > button {
+.right-bar .timeline .time-area .rows .room > a button {
   transition: 0.2s;
   width: 100%;
   min-height: 35px;
   padding: 0;
-  background: white;
+  background: white !important;
   border: none;
   border-radius: 0;
 }
 
-.right-bar .timeline .time-area .rows .room:hover > button {
+.right-bar .timeline .time-area .rows .room:hover > a button {
   cursor: pointer;
   background: #1D54FE;
   border-radius: 2px;
 }
 
-.right-bar .timeline .time-area .rows .room:hover > button:active {
+.right-bar .timeline .time-area .rows .room:hover > a button:active {
   background: #1D00FE;
+}
+
+.right-bar .timeline .time-area .rows .room > .scrolled-tag {
+  display: none;
+  position: absolute;
+  border-radius: 4px;
+  background: white;
+  padding: 5px 8px;
+  z-index: 5900;
+  left: 10px;
+  top: 0;
+  box-shadow: 0 1px 16px 0 rgba(0, 44, 92, 0.28);
 }
 
 .right-bar .timeline .time-area .rows .room.active {
@@ -654,5 +714,46 @@ main.main-page {
   width: 15px;
   height: 15px;
   transform: rotate(135deg);
+}
+
+#modal-overlay {
+  z-index: 50000;
+  background: rgba(0, 16, 33, 0.4);
+}
+
+#created-meeting, .modal-box {
+  z-index: 70000;
+}
+
+#created-meeting .modal-body h4 {
+  margin-bottom: 16px;
+}
+
+.row-col.delete {
+  padding: 0 !important;
+}
+
+.row-col.delete .delete-button {
+  padding: 20px 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  text-align: center;
+  color: #FF3333;
+  transition: 0.3s;
+}
+
+.row-col.delete .delete-button:hover {
+  background: white;
+  color: #FF3333;
+}
+
+.row-col.delete .delete-button:active, .row-col.delete .delete-button:focus {
+  background: #FF3333;
+  color: white;
+}
+
+a {
+  text-decoration: none !important;
 }
 /*# sourceMappingURL=style.css.map */

@@ -12,150 +12,122 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <img src="desktop-assets/logo.svg">
-    </header>
-
-    <main>
-        <div class="container">
-            <div class="row space-between">
-                <h4>Редактирование встречи</h4>
-                <div class="close-icon">
-                    <img src="desktop-assets/close.svg">
-                </div>
-            </div>
-
-            <div class="row auto gutters space-between">
-                <div class="row-col">
-                    <div class="labeled-input">
-                        <label>Тема</label>
-                        <input type="text" placeholder="О чём будете говорить?" value="Тестовое задание в ШРИ">
+<body class="footer-to-bottom">
+    
+    <div class="body-wrapper marg-b-sm">
+        <header>
+            <a href="main.html">
+                <img src="desktop-assets/logo.svg">
+            </a>
+        </header>
+        
+        <main>
+            <div class="container">
+                <div class="row space-between">
+                    <h4>Редактирование встречи</h4>
+                    <div class="close-icon hide-mobile">
+                        <img src="desktop-assets/close.svg">
                     </div>
                 </div>
-
-                <div class="row-col input-date">
-                    <div class="labeled-input date">
-                        <label>Дата</label>
-                        <input type="text" value="14 декабря, 2017">
-                        <img src="desktop-assets/calendar.svg">
-                    </div>
-                    <div class="labeled-input time">
-                        <label>Начало</label>
-                        <input type="text" value="16:00">
-                    </div>
-                    <span>–</span>
-                    <div class="labeled-input time">
-                        <label>Конец</label>
-                        <input type="text" value="16:30">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row auto gutters">
-                <div class="row-col">
-                    <div class="labeled-input participants">
-                        <label>Участники</label>
-                        <input type="text" placeholder="Например, Тор Одинович">
-                        <div class="input-dropdown">
-                            <ul class="people">
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Лекс Лютер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">7 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Томас Андерсон</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">2 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Дарт Вейдер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">1 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Кларк Кент</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">2 этаж</span>
-                                </li>
-                                <li class="person">
-                                    <img src="desktop-assets/close.svg">
-                                    <span class="name">Лекс Лютер</span>
-                                    <span class="dot">&#183;</span>
-                                    <span class="floor">7 этаж</span>
-                                </li>
-                            </ul>
+        
+                <div class="row auto gutters space-between">
+                    <div class="row-col">
+                        <div class="labeled-input">
+                            <label>Тема</label>
+                            <input type="text" placeholder="О чём будете говорить?" value="Тестовое задание в ШРИ">
                         </div>
-                        <div class="invited-people">
-                            <div class="invited-person">
-                                <div class="person-wrapper">
-                                    <img src="desktop-assets/close-white.svg" class="avatar">
-                                    Лекс Лютер
+                    </div>
+        
+                    <div class="row-col input-date">
+                        <div class="labeled-input date">
+                            <label>Дата</label>
+                            <input type="text" value="14 декабря, 2017">
+                            <img src="desktop-assets/calendar.svg">
+                        </div>
+                        <div class="calendar editor hide">
+                            <div class="wrapper">
+                            </div>
+                        </div>
+                        <div class="labeled-input time">
+                            <label>Начало</label>
+                            <input type="text" value="16:00">
+                        </div>
+                        <span>–</span>
+                        <div class="labeled-input time">
+                            <label>Конец</label>
+                            <input type="text" value="16:30">
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="row auto gutters gray">
+                    <div class="row-col">
+                        <div class="labeled-input participants">
+                            <label>Участники</label>
+                            <input type="text" placeholder="Например, Тор Одинович">
+                            <div class="input-dropdown hide">
+                                <ul class="people">
+                                </ul>
+                            </div>
+                            <div class="invited-people">
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="row-col room-interface">
+                        <div class="labeled-room active">
+                            <label>Ваша переговорка</label>
+                            <div class="room">
+                                <div class="info">
+                                    <span class="time">16:00–16:30</span>
+                                    <span class="location">Готем &#183; 4 этаж</span>
                                 </div>
-                                <img src="desktop-assets/close.svg" class="icon">
+                                <img src="desktop-assets/close-white.svg" onclick="cancelRoom()">
                             </div>
-                            <div class="invited-person">
-                                <div class="person-wrapper">
-                                    <img src="desktop-assets/close-white.svg" class="avatar">
-                                    Дарт Вейдер
+                        </div>
+                        <div class="labeled-room list hide">
+                            <label>Рекомендованные переговорки</label>
+                            <div class="room" onclick="chooseRoom({title: 'Готем', floor: 4})">
+                                <div class="info">
+                                    <span class="time">16:00–16:30</span>
+                                    <span class="location">Готем &#183; 4 этаж</span>
                                 </div>
-                                <img src="desktop-assets/close.svg" class="icon">
                             </div>
-                            <div class="invited-person">
-                                <div class="person-wrapper">
-                                    <img src="desktop-assets/close-white.svg" class="avatar">
-                                    Кларк Кент
+                            <div class="room" onclick="chooseRoom({title: 'Поле непаханное', floor: 4})">
+                                <div class="info">
+                                    <span class="time">16:00–16:30</span>
+                                    <span class="location">Поле непаханное &#183; 4 этаж</span>
                                 </div>
-                                <img src="desktop-assets/close.svg" class="icon">
+                            </div>
+                            <div class="room" onclick="chooseRoom({title: 'Тёмная башня', floor: 4})">
+                                <div class="info">
+                                    <span class="time">16:00–16:30</span>
+                                    <span class="location">Тёмная башня &#183; 4 этаж</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row-col room-interface">
-                    <div class="labeled-room active">
-                        <label>Ваша переговорка</label>
-                        <div class="room">
-                            <div class="info">
-                                <span class="time">16:00–16:30</span>
-                                <span class="location">Готем &#183; 4 этаж</span>
-                            </div>
-                            <img src="desktop-assets/close-white.svg" onclick="cancelRoom()">
-                        </div>
-                    </div>
-                    <div class="labeled-room list hide">
-                        <label>Ваша переговорка</label>
-                        <div class="room" onclick="chooseRoom({title: 'Готем', floor: 4})">
-                            <div class="info">
-                                <span class="time">16:00–16:30</span>
-                                <span class="location">Готем &#183; 4 этаж</span>
-                            </div>
-                            <img src="desktop-assets/close.svg">
-                        </div>
-                        <div class="room" onclick="chooseRoom({title: 'Поле непаханное', floor: 4})">
-                            <div class="info">
-                                <span class="time">16:00–16:30</span>
-                                <span class="location">Поле непаханное &#183; 4 этаж</span>
-                            </div>
-                            <img src="desktop-assets/close.svg">
-                        </div>
-                        <div class="room" onclick="chooseRoom({title: 'Тёмная башня', floor: 4})">
-                            <div class="info">
-                                <span class="time">16:00–16:30</span>
-                                <span class="location">Тёмная башня &#183; 4 этаж</span>
-                            </div>
-                            <img src="desktop-assets/close.svg">
-                        </div>
+                    <div class="row-col delete hide-desktop">
+                        <button class="delete-button" data-component="modal" data-target="#delete-meeting">Удалить встречу</button>
                     </div>
                 </div>
             </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="hide-desktop hide">
+            Выберите переговорку
         </div>
-    </main>
+        <div class="btns">
+            <a href="main.html" class="button-wrapper">
+                <button class="button">Отмена</button>
+            </a>
+            <button class="button hide-mobile" data-component="modal" data-target="#delete-meeting">Удалить встречу</button>
+            <button class="button save blue">Сохранить</button>
+        </div>
+    </footer>
 
     <div id="delete-meeting" class="modal-box hide">
         <div class="modal">
@@ -172,15 +144,11 @@
         </div>
     </div>
 
-    <footer>
-        <button class="button">Отмена</button>
-        <button class="button" data-component="modal" data-target="#delete-meeting">Удалить встречу</button>
-        <button class="button">Сохранить</button>
-    </footer>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
     <script src="js/kube.min.js"></script>
     <script src="js/choose-room.js"></script>
+    <script src="js/input-person.js"></script>
+    <script src="js/calendar.js"></script>
 
 </body>
 

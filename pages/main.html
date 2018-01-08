@@ -19,6 +19,19 @@
         <a href="new-meeting.html" class="button-wrapper">
             <button class="button blue">Создать встречу</button>
         </a>
+        <div class="date">
+            <div class="icon-container previous">
+                <img src="desktop-assets/arrow2.svg">
+            </div>
+            <h5>14 дек. &#183; Сегодня </h5>
+            <div class="icon-container next">
+                <img src="desktop-assets/arrow.svg">
+            </div>
+        </div>
+        <div class="calendar hide">
+            <div class="wrapper">
+            </div>
+        </div>
     </header>
 
     <main class="main-page">
@@ -49,7 +62,7 @@
                         <br>
                         <span class="capacity">До 10 человек</span>
                     </li>
-                    <li class="room r-3 active">
+                    <li class="room r-3">
                         <span class="title">Жёлтый Дом</span>
                         <br>
                         <span class="capacity">До 10 человек</span>
@@ -99,12 +112,33 @@
             </div>  
         </div>
     </main>
+
+    <div id="created-meeting" class="modal-box hide">
+        <div class="modal">
+            <div class="modal-body">
+                <div class="col centered">
+                    <img src="desktop-assets/emoji2.svg">
+                    <h4>Встреча создана!</h4>
+                    <p class="text-center">
+                        14 декабря, 15:00–17:00 <br>
+                        Готем &#183; 4 этаж
+                    </p>
+                </div>
+                <div class="row centered">
+                    <button class="button blue" data-action="modal-close">Хорошо</button>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kube.min.js"></script>
     <script src="js/timeline.js"></script>
     <script src="js/tooltip.js"></script>
     <script src="js/room-highlighter.js"></script>
     <script src="js/calendar.js"></script>
+    <script src="js/imitate-meeting-creation.js"></script>
+    <script src="js/main-scroll.js"></script>
 
 </body>
 

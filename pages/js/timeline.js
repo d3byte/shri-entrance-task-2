@@ -137,7 +137,9 @@ function handleEventData(data) {
 // Совмещаю уже обработанные данные об эвентах со временем так, чтобы было удобно рендерить таблицу
 function computeDataToRender(currentTime, events) {
     var data = []
+
     var handledData = handleEventData(events)
+
     for (var i = currentTime.hours - 3; i <= currentTime.hours; i++) {
         var eventInfo = handledData.map(date => {
             if (date.hoursIncluded.includes(i))
@@ -163,6 +165,7 @@ function computeDataToRender(currentTime, events) {
             events: eventInfo.filter(event => event != undefined)
         })
     }
+
     for (var i = currentTime.hours + 1; i < 24; i++) {
         var eventInfo = handledData.map(date => {
             if (date.hoursIncluded.includes(i))
@@ -184,7 +187,7 @@ function computeDataToRender(currentTime, events) {
         })
     }
 
-    return data
+    return data.filter(item => data.indexOf(item) < 24)
 }
 
 // Добавляю стили для вертикальной полосы, отображающей текущее время
@@ -249,6 +252,7 @@ function addStyle(currentTime) {
 function renderTimelines(data, currentTime) {
     var render = ''
     // Частично захардкоженная строка для рендера. В следующем задании это будет рендериться на основе существующих комнат
+    console.log(data)
     data.map((item, index) => {
         var renderString = `
         <div class="time-area ta-${index} ${item.date == currentTime.time ? 'current' : ''}">
@@ -258,20 +262,67 @@ function renderTimelines(data, currentTime) {
             </div>
             <div class="floors">
                 <div class="floor f-7">
+                    ${ index == 0 ? '<span class="floor-num">7 этаж</span>' : '' }
                     <div class="rows">
-                        <div class="room r-1"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-2"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-3"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-4"><button class="select-room s s-60">+</button></div>
+                        <div class="room r-1">
+                            ${index == 0 ? '<div class="scrolled-tag">Ржавый Фред</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-2">
+                            ${index == 0 ? '<div class="scrolled-tag">Прачечная</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-3">
+                            ${index == 0 ? '<div class="scrolled-tag">Жёлтый дом</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-4">
+                            ${index == 0 ? '<div class="scrolled-tag">Оранжевый тюльпан</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="floor f-6">
+                    ${ index == 0 ? '<span class="floor-num">6 этаж</span>' : '' }
                     <div class="rows">
-                        <div class="room r-1"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-2"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-3"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-4"><button class="select-room s s-60">+</button></div>
-                        <div class="room r-5"><button class="select-room s s-60">+</button></div>
+                        <div class="room r-1">
+                            ${index == 0 ? '<div class="scrolled-tag">Джокер</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-2">
+                            ${index == 0 ? '<div class="scrolled-tag">Мариванна</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-3">
+                            ${index == 0 ? '<div class="scrolled-tag">Тонкий Боб</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-4">
+                            ${index == 0 ? '<div class="scrolled-tag">Чёрная Вдова</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
+                        <div class="room r-5">
+                            ${index == 0 ? '<div class="scrolled-tag">Белорусский ликёр</div>' : ''}
+                            <a href="new-meeting.html" class="button-wrapper">
+                                <button class="select-room s s-60">+</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,7 +339,11 @@ function renderTimelines(data, currentTime) {
                     // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
-                    `).innerHTML = `<button class="select-room s s-${60 - event.start.time.minutes}">+</button>`
+                    `).innerHTML = `
+                    <a href="new-meeting.html" class="button-wrapper">
+                        <button class="select-room s s-${60 - event.start.time.minutes}">+</button>
+                    </a>    
+                    `
                     // Добавляю класс, чтобы определять все колонки, относящиеся к эвенту, для создания тултипа
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
@@ -297,7 +352,11 @@ function renderTimelines(data, currentTime) {
                     // Изменяю кнопку внутри дива, чтобы отобразить занятое эвентом время
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
-                    `).innerHTML = `<button class="select-room s s-${event.end.time.minutes}-r">+</button>`
+                    `).innerHTML = `
+                    <a href="new-meeting.html" class="button-wrapper">
+                        <button class="select-room s s-${event.end.time.minutes}-r">+</button>
+                    </a>   
+                    `
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).classList.add(`event-${event.id}`)
@@ -305,7 +364,7 @@ function renderTimelines(data, currentTime) {
                     // Если целый час принадлежит эвенту, убираю кнопку
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
-                    `).innerHTML = ''
+                    `).removeChild(document.querySelector(`.ta-${index} .f-${event.floor} .r-${event.room.id} a`))
                     document.querySelector(`
                     .ta-${index} .f-${event.floor} .r-${event.room.id}
                     `).classList.add(`event-${event.id}`)

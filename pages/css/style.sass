@@ -65,12 +65,17 @@ header.main-page
 
 
 footer
-  position: fixed
   width: 100%
-  bottom: 0
-  left: 0
   justify-content: center
   box-shadow: 0 -1px 0 0 $light-gray
+
+
+
+.footer-to-bottom
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  min-height: 100vh
 
 
 
@@ -119,11 +124,13 @@ footer
     &:focus
       +no-outline
       border-color: $light-blue
-      // & + .input-dropdown
-      //   display: block
+  &.time > input
+    padding: 2px 0
+    text-align: center
 
 .input-date
   +space-between
+  position: relative
   .labeled-input.date
     position: relative
     width: 65%
@@ -174,7 +181,7 @@ footer
         margin-left: 5px
         color: #ccc
         vertical-align: middle
-      span.dot
+      span.dot, span.name
         color: black
       &:hover, &.suitable
         background: $li-gray
@@ -198,6 +205,7 @@ footer
       display: flex
       align-items: center
       font-size: 14px
+      color: black
       img.avatar
         background: gray
         width: 24px
@@ -233,6 +241,11 @@ footer
       margin-right: 4px
     &:hover
       cursor: pointer
+  &.active
+    .room:hover
+      cursor: default
+    .room > img:hover
+      cursor: pointer  
   &.list > .room
     background: $light-gray
     margin-bottom: 10px
@@ -294,6 +307,7 @@ main.main-page
 .left-bar
   position: relative
   width: 305px
+  transition: 0.3s
   .date
     +flex-vertical-center
     padding: 10px 0 10px 25px
@@ -340,6 +354,13 @@ main.main-page
   padding: 16px
   +shadow
   z-index: 7000
+  &.editor
+    top: 70px
+    left: 0
+    width: 250px
+    height: 200px
+    .month:first-of-type
+      transform: scale(0.9) !important
   .wrapper
     +flex-vertical-center
     justify-content: center
@@ -354,7 +375,7 @@ main.main-page
         transform: scale(0.8)
       &:last-of-type
         margin: 0
-      .name
+      .month-name
         font-weight: bold
         margin-bottom: 5px
       table
@@ -418,8 +439,21 @@ main.main-page
         & + .floors .floor:first-of-type .room:first-of-type
           margin-top: 65px
       .floor
+        position: relative
         margin-bottom: 72px
         background: $li-gray
+        span.floor-num
+          display: none
+          position: absolute
+          left: 10px
+          top: -25px
+          z-index: 5000
+          font-size: 11px
+          font-weight: bold
+          text-transform: uppercase
+          color: $dark-gray
+        &:first-of-type > span.floor-num
+          top: 20px
       .rows
         width: 100%
         .room
@@ -430,20 +464,30 @@ main.main-page
           transition: 0.2s
           &:last-of-type
             margin-bottom: 0
-          & > button
+          & > a button
             transition: 0.2s
             width: 100%
             min-height: 35px
             padding: 0
-            background: white
+            background: white !important
             border: none
             border-radius: 0
-          &:hover > button
+          &:hover > a button
             cursor: pointer
             background: $room-hover
             border-radius: 2px
             &:active
               background: $room-pressed
+          & > .scrolled-tag
+            display: none
+            position: absolute
+            border-radius: 4px
+            background: white
+            padding: 5px 8px
+            z-index: 5900
+            left: 10px
+            top: 0
+            +shadow
           &.active
             background: $column-show-tooltip
 
@@ -508,3 +552,36 @@ main.main-page
     transform: rotate(135deg)
 
   
+#modal-overlay
+  z-index: 50000
+  background: rgba(0,16,33,0.40)
+
+#created-meeting, .modal-box
+  z-index: 70000
+
+#created-meeting .modal-body h4
+    margin-bottom: 16px
+  
+
+
+.row-col.delete
+  padding: 0 !important
+  .delete-button
+    padding: 20px 0
+    width: 100%
+    height: 100%
+    background: white
+    text-align: center
+    color: #FF3333
+    transition: 0.3s
+    &:hover
+      background: white
+      color: #FF3333
+    &:active, &:focus
+      background: #FF3333
+      color: white
+
+
+
+a
+  text-decoration: none !important

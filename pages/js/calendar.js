@@ -1,6 +1,9 @@
 // Глобальные переменные для переключения дней и месяцев
-var currentDay = new Date().getDay(),
-    monthIndex = 2
+var currentDay = new Date().getDate(),
+    monthIndex = 2,
+    // Эвент для скрывания календаря на странице редактирования или создания эвента
+    dayChanged = new Event('day-changed'),
+    screenWidth = window.screen.innerWidth || document.clientWidth || document.body.clientWidth
 
 // Узнаю, сколько дней в месяце
 function daysInMonth(month, year) {
@@ -71,11 +74,11 @@ function changeDay({ indexOfWeek, indexOfDay, indexOfMonth, month }, arrow = fal
     currentDay = month.days[indexOfWeek][indexOfDay]
     monthIndex = indexOfMonth
 
-    if (month.name == currentMonth && day == (new Date().getDay() + 1) ) {
+    if (month.name == currentMonth && day == (new Date().getDate() + 1) ) {
         h5 += ' Завтра'
-    } else if (month.name == currentMonth && (day == new Date().getDay() - 1)) {
+    } else if (month.name == currentMonth && (day == new Date().getDate() - 1)) {
         h5 += ' Вчера'
-    } else if (month.name == currentMonth && day == new Date().getDay()) {
+    } else if (month.name == currentMonth && day == new Date().getDate()) {
         h5 += ' Сегодня'
     } else {
         monthName = month.name.toLowerCase().slice(0, month.name.length - 1) + 'я'
@@ -83,6 +86,8 @@ function changeDay({ indexOfWeek, indexOfDay, indexOfMonth, month }, arrow = fal
     }
 
     document.querySelector('.left-bar .date h5').innerHTML = h5
+    document.querySelector('header .date h5').innerHTML = h5
+    
 
     // Меняю активную клетку таблицы
     var today = document.querySelector('td.today')
@@ -98,51 +103,95 @@ function changeDay({ indexOfWeek, indexOfDay, indexOfMonth, month }, arrow = fal
 }
 
 // Добавляю обработчик клика к клетке таблицы
-function addEventListener(element, info) {
+function addEvent(element, info) {
     element.addEventListener('click', () => changeDay(info))
 }
 
+// Отдельная функция для обработки клика календаря для выбора даты встречи
+function chooseDay({ indexOfWeek, indexOfDay, indexOfMonth, month }) {
+    var day = month.days[indexOfWeek][indexOfDay],
+        monthName = month.name.toLowerCase().slice(0, month.name.length - 1) + 'я',
+        text = `${day} ${monthName}, ${new Date().getFullYear()}`
+
+    document.querySelector('.labeled-input.date input').value = text
+    document.querySelector('.calendar.editor').classList.add('hide')
+}
+
 // Создаю месяц
-function createMonth(monthInfo, current = false, index) {
+function createMonth(monthInfo, current = false, index, editor = false) {
     var month = document.createElement('div')
     month.classList.add('month')
     month.innerHTML = `
-        <div class="name">
+        <div class="month-name">
             ${monthInfo.name}
         </div>
     `
     var table = document.createElement('table')
+    table.classList.add('table')
     monthInfo.days.map(week => {
         var tr = document.createElement('tr')
+        tr.classList.add('tr')
         week.map(day => {
             var td = document.createElement('td')
+            td.classList.add('td')
             // Отмечаю сегодня на календаре
-            if(current && day == new Date().getDay()) {
+            if(current && day == new Date().getDate()) {
                 td.classList.add('today')
             }
             td.innerText = day
-            addEventListener(td, {
-                indexOfWeek: monthInfo.days.indexOf(week),
-                indexOfDay: week.indexOf(day),
-                month: monthInfo,
-                indexOfMonth: index
-            })
+            // Проверяю, если скрипт применяется для страницы создания встречи или нет
+            if(!editor) {
+                addEvent(td, {
+                    indexOfWeek: monthInfo.days.indexOf(week),
+                    indexOfDay: week.indexOf(day),
+                    month: monthInfo,
+                    indexOfMonth: index
+                })
+            } else {
+                td.addEventListener('click', () => chooseDay({
+                    indexOfWeek: monthInfo.days.indexOf(week),
+                    indexOfDay: week.indexOf(day),
+                    month: monthInfo,
+                    indexOfMonth: index
+                }))
+            }
             tr.appendChild(td)
         })
         table.appendChild(tr)
     })
     month.appendChild(table)
-    
-    document.querySelector('.calendar .wrapper').appendChild(month)
+
+    if(window.location.pathname == '/pages/main.html') {
+        if (screenWidth <= 768) {
+            document.querySelector('header .calendar .wrapper').appendChild(month)
+        } else {
+            document.querySelector('main .calendar .wrapper').appendChild(month)
+        }
+    } else {
+        document.querySelector('.calendar .wrapper').appendChild(month)
+    }
 }
 
 // Показываю или скрываю календарь
 function toggleCalendar() {
-    var calendar = document.querySelector('.calendar')
+    var calendar
+    if(screenWidth <= 768) {
+        calendar = document.querySelector('header .calendar')
+    } else {
+        calendar = document.querySelector('main .calendar')
+    }
     if(calendar.classList.contains('hide')) {
         calendar.classList.remove('hide')
+        if (screenWidth <= 648) {
+            var blurElem = document.createElement('div')
+            blurElem.classList.add('blur')
+            document.querySelector('main.main-page').append(blurElem)
+        }
     } else {
         calendar.classList.add('hide')
+        if (screenWidth <= 648) {
+            document.querySelector('.blur').remove()
+        }
     }
 }
 
@@ -214,11 +263,63 @@ function prevDay(months) {
     }
 }
 
-// Основная функция, заполняющая календарь
-function fillCalendar() {
+// Скрываю календарь на странице редактирования или создания встречи
+function hideMeetingCalendar(e) {
+    var allowedClasses = ['calendar', 'editor', 'wrapper', 'month', 'month-name', 
+            'table', 'tr', 'td' 
+        ],
+        clickedDate = false,
+        clickedPlace
+
+    if (e.type != 'click') {
+        clickedPlace = e.explicitOriginalTarget
+    } else {
+        clickedDate = e.target
+        document.querySelector('body .container').removeEventListener('click')
+    }
+    
+
+    var activeDate = document.querySelector('td.today')
+    if(activeDate) {
+        activeDate.classList.remove('today')
+    }
+    if (clickedPlace.tagName == 'TD') {
+        clickedPlace.classList.add('today')
+    } else if (clickedPlace.parentElement.tagName == 'TD') {
+        clickedPlace.parentElement.classList.add('today')
+    }
+    allowedClasses.map(className => {
+        if (clickedPlace.classList && clickedPlace.classList.contains(className) ||
+            clickedPlace.parentElement.classList && clickedPlace.parentElement.classList.contains(className)
+        ) {
+            clickedDate = true
+            document.querySelector('header').innerHTML = ''
+        }
+    })
+    // Если нажат не календарь, то закрываю меню сразу. Если календарь, то закрываю после того,
+    // как дата обновлена
+    if (clickedDate) {
+        document.addEventListener('day-changed', () => {
+            document.querySelector('.calendar.editor').classList.add('hide')
+        })
+    } else {
+        document.querySelector('.calendar.editor').classList.add('hide')
+    }   
+}
+
+// Показываю календарь на странице редактирования или создания встречи
+function showMeetingCalendar() {
+    document.querySelector('.calendar.editor').classList.remove('hide')
+    document.querySelector('body .container').addEventListener('click', e => hideMeetingCalendar(e))
+}
+
+// Основная функция, заполняющая календарь, на главной странице
+function fillMainCalendar() {
     var date = new Date(),
+        day = date.getDate(),
         year = date.getFullYear(),
         currentMonth = getMonthInfo(date.getMonth(), year),
+        monthName = currentMonth.name.toLowerCase().slice(0, 3) + '.',
         previousMonth = getMonthInfo(date.getMonth() - 1, year),
         nextMonth = getMonthInfo(date.getMonth() + 1, year)
 
@@ -226,13 +327,49 @@ function fillCalendar() {
     createMonth(currentMonth, true, 2)
     createMonth(nextMonth, false, 3)
     
-    document.querySelector('.date h5').addEventListener('click', () => toggleCalendar())
-    document.querySelector('.next').addEventListener('click', () => {
-        nextDay([previousMonth, currentMonth, nextMonth])
-    })
-    document.querySelector('.previous').addEventListener('click', () => {
-        prevDay([previousMonth, currentMonth, nextMonth])
-    })
+    var text = `${day} ${monthName} &#183; Сегодня`
+
+    if (screenWidth <= 768) {
+        document.querySelector('header .date h5').innerHTML = text
+        document.querySelector('header .date h5').addEventListener('click', () => toggleCalendar())
+        document.querySelector('header .date .next').addEventListener('click', () => {
+            nextDay([previousMonth, currentMonth, nextMonth])
+        })
+        document.querySelector('header .date .previous').addEventListener('click', () => {
+            prevDay([previousMonth, currentMonth, nextMonth])
+        })
+    } else {
+        document.querySelector('.left-bar .date h5').innerHTML = text
+        document.querySelector('.left-bar .date h5').addEventListener('click', () => toggleCalendar())
+        document.querySelector('.left-bar .date .next').addEventListener('click', () => {
+            nextDay([previousMonth, currentMonth, nextMonth])
+        })
+        document.querySelector('.left-bar .date .previous').addEventListener('click', () => {
+            prevDay([previousMonth, currentMonth, nextMonth])
+        })
+    }
 }
 
-fillCalendar()
+// Основная функция, заполняющая календарь, на странице создания встречи
+function fillMeetingCalendar() {
+    var date = new Date(),
+        day = date.getDate(),
+        year = date.getFullYear(),
+        currentMonth = getMonthInfo(date.getMonth(), year),
+        month = currentMonth.name.toLowerCase()
+            .slice(0, currentMonth.name.length - 1) + 'я'
+
+    createMonth(currentMonth, true, 2, true)
+
+
+    var today = `${day} ${month}, ${year}`
+    document.querySelector('.labeled-input.date input').value = today
+    document.querySelector('.labeled-input.date input').addEventListener('focus', showMeetingCalendar)
+    document.querySelector('.labeled-input.date input').addEventListener('blur', e => hideMeetingCalendar(e))
+}
+
+if (window.location.pathname != '/pages/new-meeting.html' && window.location.pathname != '/pages/edit-meeting.html') {
+    fillMainCalendar()
+} else {
+    fillMeetingCalendar()
+}

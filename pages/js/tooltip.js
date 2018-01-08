@@ -153,13 +153,14 @@ function removePreviousTooltip() {
 // Основная функция, создающая тултип
 function createTooltip(e, event) {
     removePreviousTooltip()
-    var tooltip = document.createElement('div'),
-        amount = determineColAmount(event.id)
-    tooltip.classList.add('tooltip')
-    highlightEventCols(event.id, amount)
-    positionArrow(e)
-    checkForContentOverlay(e, tooltip)
-    tooltip.innerHTML = `
+    if(e.target.tagName != 'BUTTON') {
+        var tooltip = document.createElement('div'),
+            amount = determineColAmount(event.id)
+        tooltip.classList.add('tooltip')
+        highlightEventCols(event.id, amount)
+        positionArrow(e)
+        checkForContentOverlay(e, tooltip)
+        tooltip.innerHTML = `
         <div class="header">
             <span class="title">${event.title}</span>
              <div class="icon-container">
@@ -184,7 +185,12 @@ function createTooltip(e, event) {
             <span class="left">и 12 участников</span> 
         </div>
     `
-    e.target.appendChild(tooltip)
+
+        if (screenWidth <= 768) {
+            tooltip.style.width = screenWidth
+        }
+        e.target.appendChild(tooltip)
+    }
 }
 
 // Ставлю обработчики эвентов на колонки

@@ -21,7 +21,7 @@ function stopHighlighting(e, event) {
 
 // Ставлю обработчики эвентов на кнопки в колонках
 fetchEvents(0).then(res => {
-    var freeSpace = document.querySelectorAll(`.room button`)
+    var freeSpace = document.querySelectorAll(`.room a`)
     for(let element of freeSpace) {
         element.addEventListener('mouseover', e => highlightRoom(element))
         element.addEventListener('mouseout', e => stopHighlighting(element))

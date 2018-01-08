@@ -8,27 +8,30 @@ var users = [
 var invitedUsers = []
 
 // Эвент, чтобы закрывать список юзеров после добавления
-var personAdded = new CustomEvent("person-added")
+var personAdded = new Event('person-added')
 
 // Обработчик для отображения подходящих пользователей под введённое имя
 function inputHandler(e) {
     var text = e.target.value
-    var suitableUser = users.map(user => {
-        console.log(user)
-        if (user.name.indexOf(text) !== -1) {
-            console.log(text)
-            return user.id
+    if(text != '') {
+        var suitableUser = users.map(user => {
+            if (user.name.indexOf(text) !== -1) {
+                return user
+            }
+        })
+        suitableUser = suitableUser.filter(item => item != undefined)
+        if (suitableUser[0]) {
+            var previousSuitable = document.querySelector('li.person.suitable')
+            if (previousSuitable)
+                previousSuitable.classList.remove('suitable')
+            var nextSuitable = document.querySelector(`.person.p-${suitableUser[0].id}`)
+            var copy = nextSuitable.cloneNode(true)
+            copy.classList.add('suitable')
+            copy.addEventListener('click', () => addUser(suitableUser[0]))
+            nextSuitable.remove()
+            document.querySelector('ul.people').insertBefore(copy, document.querySelector('ul.people').firstChild)
         }
-    })
-    suitableUser = suitableUser.filter(item => item != undefined)
-    var previousSuitable = document.querySelector('li.person.suitable')
-    if(previousSuitable)
-        previousSuitable.classList.remove('suitable')
-    var nextSuitable = document.querySelector(`.person.p-${suitableUser[0]}`),
-        copy = nextSuitable.cloneNode(true)
-    copy.classList.add('suitable')
-    nextSuitable.remove()
-    document.querySelector('ul.people').insertBefore(copy, document.querySelector('ul.people').firstChild)
+    }
 }
 
 // Добавляю юзера в список снизу
@@ -50,6 +53,7 @@ function addUser(user) {
     document.querySelector(`ul.people li.p-${user.id}`).remove()
     // Создаю эвент об успешном добавлении
     document.dispatchEvent(personAdded)
+    document.querySelector('.input-dropdown').classList.add('hide')
 }
 
 // Убираю юзера из этого списка
@@ -74,10 +78,25 @@ function showUserList() {
 }
 
 // Скрываю список пользователей для приглашения
-function hideUserList() {
-    document.addEventListener('person-added', () => {
-        document.querySelector('.input-dropdown').classList.add('hide')
+function hideUserList(e) {
+    // Проверяю, если был нажат элемент списка пользователей
+    var clickedPlace = e.explicitOriginalTarget,
+        allowedClasses = ['name', 'input-dropdown', 'people', 'person', 'avatar', 'dot', 'floor'],
+        clickedPerson = false
+    allowedClasses.map(className => {
+        if (clickedPlace.classList && clickedPlace.classList.contains(className)) {
+            clickedPerson = true
+        }
     })
+    // Если нажат не список, то закрываю меню сразу. Если список, то закрываю после того,
+    // как список обновлён
+    if(clickedPerson) {
+        document.addEventListener('person-added', () => {
+            document.querySelector('.input-dropdown').classList.add('hide')
+        })
+    } else {
+        document.querySelector('.input-dropdown').classList.add('hide')
+    }   
 }
 
 // Рендерю список пользователей
@@ -86,7 +105,7 @@ function renderUserList(users) {
         var userContainer = document.createElement('li')
         userContainer.classList.add('person', `p-${user.id}`)
         userContainer.innerHTML = `
-            <img src="desktop-assets/close.svg">
+            <img src="desktop-assets/close.svg" class="avatar">
             <span class="name">${user.name}</span>
             <span class="dot">&#183;</span>
             <span class="floor">${user.floor} этаж</span>
@@ -100,4 +119,4 @@ renderUserList(users)
 
 document.querySelector('.labeled-input.participants input').addEventListener('input', e => inputHandler(e))
 document.querySelector('.labeled-input.participants input').addEventListener('focus', showUserList)
-document.querySelector('.labeled-input.participants input').addEventListener('blur', hideUserList)
+document.querySelector('.labeled-input.participants input').addEventListener('blur',e => hideUserList(e))
