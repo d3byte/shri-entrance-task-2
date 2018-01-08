@@ -244,11 +244,11 @@
 }
 
 @media (max-width: 560px) {
-  main .calendar, main .calendar .wrapper {
+  header .calendar, header .calendar .wrapper {
     flex-direction: column;
     height: auto;
   }
-  main .calendar .month, main .calendar .wrapper .month {
+  header .calendar .month, header .calendar .wrapper .month {
     margin-right: 0;
   }
 }
